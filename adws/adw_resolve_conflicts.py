@@ -82,25 +82,12 @@ def resolve_conflicts_with_claude(
     worktree_path: str
 ) -> Tuple[bool, str]:
     """Use Claude to resolve conflicts intelligently."""
-    # Prepare context about conflicted files
-    conflicts_context = "\n".join([
-        f"- {f}" for f in conflicted_files
-    ])
-
-    # Get full diff of conflicts
-    diff_result = subprocess.run(
-        ["git", "diff"],
-        capture_output=True,
-        text=True,
-        cwd=worktree_path
-    )
-    conflicts_diff = diff_result.stdout[:50000]  # Limit size
-
-    # Call Claude to resolve
+    # Call Claude to resolve - it will discover conflicts using git commands
+    # The /resolve_conflicts command knows to look for conflicts in the working directory
     request = AgentTemplateRequest(
         agent_name="conflict_resolver",
         slash_command="/resolve_conflicts",
-        args=[conflicts_context, conflicts_diff],
+        args=[],  # No args - Claude will discover conflicts using git
         adw_id=adw_id,
         working_dir=worktree_path
     )
