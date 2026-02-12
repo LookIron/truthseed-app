@@ -62,3 +62,11 @@ This prompt helps you determine what documentation you should read based on the 
     - When working with upload button text or labeling
     - When implementing UI text changes for data upload functionality
     - When troubleshooting upload button display or terminology
+
+- app_docs/feature-e0066ae3-complete-truths-update.md
+  - Conditions:
+    - When working with src/content/truths.json
+    - When implementing biblical truths content updates
+    - When troubleshooting truth data structure or schema
+    - When working with Truth model validation
+    - When adding or modifying biblical truth entries
