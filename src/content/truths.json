@@ -2,7 +2,7 @@
   "truths": [
     {
       "id": "accepted-child-of-god",
-      "title": "Soy aceptado: Soy hijo de Dios",
+      "title": "Eres hijo de Dios",
       "renounceStatement": "Renuncio a la mentira que soy rechazado. En Cristo, soy hijo de Dios.",
       "category": "accepted",
       "references": [
@@ -17,9 +17,170 @@
       "tags": ["identity", "adoption", "acceptance"]
     },
     {
+      "id": "accepted-friend-of-christ",
+      "title": "Eres amigo de Cristo",
+      "renounceStatement": "Renuncio a la mentira que estoy distante de Cristo. En Cristo, soy amigo de Jesús.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Juan",
+          "chapter": 15,
+          "verseStart": 5,
+          "display": "Juan 15:5",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["friendship", "relationship", "acceptance"]
+    },
+    {
+      "id": "accepted-justified",
+      "title": "Has sido justificado",
+      "renounceStatement": "Renuncio a la mentira de mi culpa. En Cristo, he sido justificado.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Romanos",
+          "chapter": 5,
+          "verseStart": 1,
+          "display": "Romanos 5:1",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["justification", "righteousness", "acceptance"]
+    },
+    {
+      "id": "accepted-united-with-god",
+      "title": "Estás unido a Dios y soy un espíritu con Él",
+      "renounceStatement": "Renuncio a la mentira que estoy separado de Dios. En Cristo, estoy unido a Dios y soy un espíritu con Él.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "1 Corintios",
+          "chapter": 6,
+          "verseStart": 17,
+          "display": "1 Corintios 6:17",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["union", "oneness", "spirit"]
+    },
+    {
+      "id": "accepted-bought-with-price",
+      "title": "Has sido comprado por un precio- perteneces a Dios",
+      "renounceStatement": "Renuncio a la mentira que soy mi propio dueño. En Cristo, he sido comprado por un precio y pertenezco a Dios.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "1 Corintios",
+          "chapter": 6,
+          "verseStart": 19,
+          "verseEnd": 20,
+          "display": "1 Corintios 6:19-20",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["redemption", "ownership", "value"]
+    },
+    {
+      "id": "accepted-member-of-body",
+      "title": "Eres un miembro del cuerpo de Cristo",
+      "renounceStatement": "Renuncio a la mentira que estoy solo. En Cristo, soy un miembro del cuerpo de Cristo.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "1 Corintios",
+          "chapter": 12,
+          "verseStart": 27,
+          "display": "1 Corintios 12:27",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["church", "community", "belonging"]
+    },
+    {
+      "id": "accepted-saint",
+      "title": "Eres un santo / una santa, fiel en Cristo",
+      "renounceStatement": "Renuncio a la mentira que soy impuro. En Cristo, soy un santo.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Efesios",
+          "chapter": 1,
+          "verseStart": 1,
+          "display": "Efesios 1:1",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["holiness", "identity", "acceptance"]
+    },
+    {
+      "id": "accepted-adopted",
+      "title": "Has sido adoptado/a como hijo de Dios",
+      "renounceStatement": "Renuncio a la mentira que soy huérfano. En Cristo, he sido adoptado como hijo de Dios.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Efesios",
+          "chapter": 1,
+          "verseStart": 5,
+          "display": "Efesios 1:5",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["adoption", "family", "sonship"]
+    },
+    {
+      "id": "accepted-direct-access",
+      "title": "Tienes acceso directo a Dios por el Espíritu Santo",
+      "renounceStatement": "Renuncio a la mentira que no puedo acercarme a Dios. En Cristo, tengo acceso directo a Dios por el Espíritu Santo.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Efesios",
+          "chapter": 2,
+          "verseStart": 18,
+          "display": "Efesios 2:18",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["access", "holy-spirit", "prayer"]
+    },
+    {
+      "id": "accepted-redeemed-forgiven",
+      "title": "Has sido redimido y perdonado/a de todos tus pecados",
+      "renounceStatement": "Renuncio a la mentira que mis pecados me condenan. En Cristo, he sido redimido y perdonado de todos mis pecados.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Colosenses",
+          "chapter": 1,
+          "verseStart": 14,
+          "display": "Colosenses 1:14",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["redemption", "forgiveness", "grace"]
+    },
+    {
+      "id": "accepted-complete-in-christ",
+      "title": "Eres completo en Cristo",
+      "renounceStatement": "Renuncio a la mentira que me falta algo. En Cristo, soy completo.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Colosenses",
+          "chapter": 2,
+          "verseStart": 10,
+          "display": "Colosenses 2:10",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["completeness", "sufficiency", "wholeness"]
+    },
+    {
       "id": "secure-free-from-condemnation",
-      "title": "Soy seguro: Estoy libre de condenación",
-      "renounceStatement": "Renuncio a la mentira de la condenación. En Cristo, no hay ninguna condenación para mí.",
+      "title": "Estás libre de condenación",
+      "renounceStatement": "Renuncio a la mentira de la condenación. En Cristo, estoy libre de condenación.",
       "category": "secure",
       "references": [
         {
@@ -34,9 +195,309 @@
       "tags": ["freedom", "forgiveness", "security"]
     },
     {
+      "id": "secure-all-things-work-together",
+      "title": "Estás seguro de que todas las cosas trabajan juntas para bien",
+      "renounceStatement": "Renuncio a la mentira que mi vida es caótica. En Cristo, todas las cosas trabajan juntas para bien.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Romanos",
+          "chapter": 8,
+          "verseStart": 28,
+          "display": "Romanos 8:28",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["providence", "purpose", "security"]
+    },
+    {
+      "id": "secure-free-from-charges",
+      "title": "Estás libre de todo cargo condenatorio en tu contra",
+      "renounceStatement": "Renuncio a la mentira de acusación. En Cristo, estoy libre de todo cargo condenatorio.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Romanos",
+          "chapter": 8,
+          "verseStart": 31,
+          "verseEnd": 34,
+          "display": "Romanos 8:31-34",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["justification", "freedom", "security"]
+    },
+    {
+      "id": "secure-inseparable-from-love",
+      "title": "No puedes ser separado del amor de Dios",
+      "renounceStatement": "Renuncio a la mentira que puedo perder el amor de Dios. En Cristo, nada me puede separar del amor de Dios.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Romanos",
+          "chapter": 8,
+          "verseStart": 35,
+          "verseEnd": 39,
+          "display": "Romanos 8:35-39",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["love", "security", "assurance"]
+    },
+    {
+      "id": "secure-established-anointed-sealed",
+      "title": "Has sido establecido, ungido y sellado por Dios",
+      "renounceStatement": "Renuncio a la mentira que soy inestable. En Cristo, he sido establecido, ungido y sellado por Dios.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "2 Corintios",
+          "chapter": 1,
+          "verseStart": 21,
+          "verseEnd": 22,
+          "display": "2 Corintios 1:21-22",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["security", "anointing", "holy-spirit"]
+    },
+    {
+      "id": "secure-good-work-perfected",
+      "title": "La buena obra que Dios ha comenzado en ti será perfeccionada",
+      "renounceStatement": "Renuncio a la mentira que Dios me abandonará. En Cristo, la buena obra que Dios ha comenzado en mí será perfeccionada.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Filipenses",
+          "chapter": 1,
+          "verseStart": 6,
+          "display": "Filipenses 1:6",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["faithfulness", "perseverance", "security"]
+    },
+    {
+      "id": "secure-citizen-of-heaven",
+      "title": "Eres un/a ciudadano del cielo",
+      "renounceStatement": "Renuncio a la mentira que este mundo es mi hogar. En Cristo, soy ciudadano del cielo.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Filipenses",
+          "chapter": 3,
+          "verseStart": 20,
+          "display": "Filipenses 3:20",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["heaven", "citizenship", "identity"]
+    },
+    {
+      "id": "secure-hidden-with-christ",
+      "title": "Estás escondido con Cristo en Dios",
+      "renounceStatement": "Renuncio a la mentira que soy vulnerable. En Cristo, estoy escondido con Cristo en Dios.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Colosenses",
+          "chapter": 3,
+          "verseStart": 3,
+          "display": "Colosenses 3:3",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["security", "protection", "union"]
+    },
+    {
+      "id": "secure-spirit-of-power",
+      "title": "No te ha sido dado un espíritu de temor, sino de poder, amor y dominio propio",
+      "renounceStatement": "Renuncio a la mentira del temor. En Cristo, no me ha sido dado un espíritu de temor, sino de poder, amor y dominio propio.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "2 Timoteo",
+          "chapter": 1,
+          "verseStart": 7,
+          "display": "2 Timoteo 1:7",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["power", "courage", "self-control"]
+    },
+    {
+      "id": "secure-grace-and-mercy",
+      "title": "Puedes encontrar gracia y misericordia para ayuda en tiempos de necesidad",
+      "renounceStatement": "Renuncio a la mentira que estoy solo en mis luchas. En Cristo, puedo encontrar gracia y misericordia para ayuda en tiempos de necesidad.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Hebreos",
+          "chapter": 4,
+          "verseStart": 16,
+          "display": "Hebreos 4:16",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["grace", "mercy", "help"]
+    },
+    {
+      "id": "secure-born-of-god",
+      "title": "Eres nacido de Dios y el maligno no te puede tocar",
+      "renounceStatement": "Renuncio a la mentira que soy vulnerable al enemigo. En Cristo, soy nacido de Dios y el maligno no me puede tocar.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "1 Juan",
+          "chapter": 5,
+          "verseStart": 18,
+          "display": "1 Juan 5:18",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["protection", "security", "spiritual-warfare"]
+    },
+    {
+      "id": "significant-salt-and-light",
+      "title": "Eres la sal de la tierra y la luz del mundo",
+      "renounceStatement": "Renuncio a la mentira que no tengo influencia. En Cristo, soy la sal de la tierra y la luz del mundo.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "Mateo",
+          "chapter": 5,
+          "verseStart": 13,
+          "verseEnd": 14,
+          "display": "Mateo 5:13-14",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["purpose", "influence", "mission"]
+    },
+    {
+      "id": "significant-branch-of-vine",
+      "title": "Eres un sarmiento de la Vid Verdadera, Jesús, un canal de Su vida",
+      "renounceStatement": "Renuncio a la mentira que estoy desconectado de Cristo. En Cristo, soy un sarmiento de la Vid Verdadera, un canal de Su vida.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "Juan",
+          "chapter": 15,
+          "verseStart": 1,
+          "display": "Juan 15:1",
+          "translation": "RVR60"
+        },
+        {
+          "book": "Juan",
+          "chapter": 15,
+          "verseStart": 5,
+          "display": "Juan 15:5",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["connection", "fruitfulness", "dependence"]
+    },
+    {
+      "id": "significant-chosen-to-bear-fruit",
+      "title": "Has sido escogido y destinado por Dios para llevar fruto",
+      "renounceStatement": "Renuncio a la mentira que mi vida es sin propósito. En Cristo, he sido escogido y destinado por Dios para llevar fruto.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "Juan",
+          "chapter": 15,
+          "verseStart": 16,
+          "display": "Juan 15:16",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["purpose", "fruitfulness", "calling"]
+    },
+    {
+      "id": "significant-witness-of-christ",
+      "title": "Eres un testigo personal de Cristo capacitado por el Espíritu",
+      "renounceStatement": "Renuncio a la mentira que no tengo nada que ofrecer. En Cristo, soy un testigo personal capacitado por el Espíritu.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "Hechos",
+          "chapter": 1,
+          "verseStart": 8,
+          "display": "Hechos 1:8",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["witness", "holy-spirit", "mission"]
+    },
+    {
+      "id": "significant-temple-of-god",
+      "title": "Eres un templo de Dios",
+      "renounceStatement": "Renuncio a la mentira que soy común. En Cristo, soy un templo de Dios.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "1 Corintios",
+          "chapter": 3,
+          "verseStart": 16,
+          "display": "1 Corintios 3:16",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["holy-spirit", "holiness", "value"]
+    },
+    {
+      "id": "significant-minister-of-reconciliation",
+      "title": "Eres un ministro de reconciliación para Dios",
+      "renounceStatement": "Renuncio a la mentira que no tengo un ministerio. En Cristo, soy un ministro de reconciliación para Dios.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "2 Corintios",
+          "chapter": 5,
+          "verseStart": 17,
+          "verseEnd": 20,
+          "display": "2 Corintios 5:17-20",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["ministry", "reconciliation", "ambassador"]
+    },
+    {
+      "id": "significant-coworker-with-god",
+      "title": "Eres un/a colaborador con Dios",
+      "renounceStatement": "Renuncio a la mentira que trabajo solo. En Cristo, soy un colaborador con Dios.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "2 Corintios",
+          "chapter": 6,
+          "verseStart": 1,
+          "display": "2 Corintios 6:1",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["partnership", "purpose", "calling"]
+    },
+    {
+      "id": "significant-seated-in-heavenly-places",
+      "title": "Estás sentado con Cristo en los lugares celestiales",
+      "renounceStatement": "Renuncio a la mentira que soy insignificante. En Cristo, estoy sentado con Cristo en los lugares celestiales.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "Efesios",
+          "chapter": 2,
+          "verseStart": 6,
+          "display": "Efesios 2:6",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["authority", "position", "victory"]
+    },
+    {
       "id": "significant-gods-workmanship",
-      "title": "Soy significante: Soy obra maestra de Dios",
-      "renounceStatement": "Renuncio a la mentira que no tengo valor. En Cristo, soy su obra maestra creada para buenas obras.",
+      "title": "Eres hechura de Dios, creado para buenas obras",
+      "renounceStatement": "Renuncio a la mentira que no tengo valor. En Cristo, soy hechura de Dios, creado para buenas obras.",
       "category": "significant",
       "references": [
         {
@@ -50,119 +511,36 @@
       "tags": ["purpose", "value", "creation"]
     },
     {
-      "id": "loved-nothing-can-separate",
-      "title": "Soy amado: Nada me puede separar del amor de Dios",
-      "renounceStatement": "Renuncio a la mentira que estoy solo y no amado. En Cristo, nada me puede separar del amor de Dios.",
-      "category": "loved",
-      "references": [
-        {
-          "book": "Romanos",
-          "chapter": 8,
-          "verseStart": 38,
-          "verseEnd": 39,
-          "display": "Romanos 8:38-39",
-          "translation": "RVR60"
-        }
-      ],
-      "tags": ["love", "security", "assurance"]
-    },
-    {
-      "id": "identity-new-creation",
-      "title": "Soy nueva criatura: Las cosas viejas pasaron",
-      "renounceStatement": "Renuncio a vivir en mi vieja identidad. En Cristo, soy una nueva creación.",
-      "category": "identity",
-      "references": [
-        {
-          "book": "2 Corintios",
-          "chapter": 5,
-          "verseStart": 17,
-          "display": "2 Corintios 5:17",
-          "translation": "RVR60"
-        }
-      ],
-      "tags": ["transformation", "newness", "identity"]
-    },
-    {
-      "id": "freedom-set-free",
-      "title": "Soy libre: Cristo me ha libertado",
-      "renounceStatement": "Renuncio a vivir en esclavitud. En Cristo, he sido libertado para libertad.",
-      "category": "freedom",
-      "references": [
-        {
-          "book": "Gálatas",
-          "chapter": 5,
-          "verseStart": 1,
-          "display": "Gálatas 5:1",
-          "translation": "RVR60"
-        }
-      ],
-      "tags": ["freedom", "liberty", "deliverance"]
-    },
-    {
-      "id": "accepted-chosen-before-foundation",
-      "title": "Soy aceptado: Fui escogido antes de la fundación del mundo",
-      "renounceStatement": "Renuncio a la mentira que soy un accidente. En Cristo, fui escogido antes de la fundación del mundo.",
-      "category": "accepted",
-      "references": [
-        {
-          "book": "Efesios",
-          "chapter": 1,
-          "verseStart": 4,
-          "display": "Efesios 1:4",
-          "translation": "RVR60"
-        }
-      ],
-      "tags": ["chosen", "predestined", "acceptance"]
-    },
-    {
-      "id": "secure-sealed-with-holy-spirit",
-      "title": "Soy seguro: Estoy sellado con el Espíritu Santo",
-      "renounceStatement": "Renuncio a la mentira de inseguridad. En Cristo, estoy sellado con el Espíritu Santo como garantía.",
-      "category": "secure",
-      "references": [
-        {
-          "book": "Efesios",
-          "chapter": 1,
-          "verseStart": 13,
-          "verseEnd": 14,
-          "display": "Efesios 1:13-14",
-          "translation": "RVR60"
-        }
-      ],
-      "tags": ["security", "holy-spirit", "guarantee"]
-    },
-    {
-      "id": "significant-temple-of-god",
-      "title": "Soy significante: Soy templo del Espíritu Santo",
-      "renounceStatement": "Renuncio a la mentira que mi cuerpo no importa. En Cristo, soy templo del Espíritu Santo.",
+      "id": "significant-approach-with-confidence",
+      "title": "Puedes acercarte a Dios con libertad y confianza",
+      "renounceStatement": "Renuncio a la mentira que debo temer a Dios. En Cristo, puedo acercarme a Dios con libertad y confianza.",
       "category": "significant",
       "references": [
         {
-          "book": "1 Corintios",
-          "chapter": 6,
-          "verseStart": 19,
-          "verseEnd": 20,
-          "display": "1 Corintios 6:19-20",
+          "book": "Efesios",
+          "chapter": 3,
+          "verseStart": 12,
+          "display": "Efesios 3:12",
           "translation": "RVR60"
         }
       ],
-      "tags": ["holy-spirit", "holiness", "value"]
+      "tags": ["access", "confidence", "boldness"]
     },
     {
-      "id": "loved-loved-with-everlasting-love",
-      "title": "Soy amado: Dios me ha amado con amor eterno",
-      "renounceStatement": "Renuncio a dudar del amor de Dios. En Cristo, Él me ha amado con amor eterno.",
-      "category": "loved",
+      "id": "significant-all-things-through-christ",
+      "title": "Todo lo puedes en Cristo que te fortalece",
+      "renounceStatement": "Renuncio a la mentira que soy débil e incapaz. En Cristo, todo lo puedo en Cristo que me fortalece.",
+      "category": "significant",
       "references": [
         {
-          "book": "Jeremías",
-          "chapter": 31,
-          "verseStart": 3,
-          "display": "Jeremías 31:3",
+          "book": "Filipenses",
+          "chapter": 4,
+          "verseStart": 13,
+          "display": "Filipenses 4:13",
           "translation": "RVR60"
         }
       ],
-      "tags": ["love", "faithfulness", "eternal"]
+      "tags": ["strength", "power", "capability"]
     }
   ]
 }
