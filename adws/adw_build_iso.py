@@ -159,28 +159,56 @@ def main():
                            f"🔌 Ports - Backend: {backend_port}, Frontend: {frontend_port}")
     )
     
-    # Implement the plan (executing in worktree)
-    logger.info("Implementing solution in worktree")
-    make_issue_comment(
-        issue_number,
-        format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Implementing solution in isolated environment")
+    # Check if implementation was already completed (idempotency)
+    # Look for uncommitted changes or existing commits beyond the base
+    result = subprocess.run(
+        ["git", "status", "--porcelain"],
+        capture_output=True,
+        text=True,
+        cwd=worktree_path
     )
-    
-    implement_response = implement_plan(plan_file, adw_id, logger, working_dir=worktree_path)
-    
-    if not implement_response.success:
-        logger.error(f"Error implementing solution: {implement_response.output}")
+    has_uncommitted_changes = bool(result.stdout.strip())
+
+    # Check if there are commits beyond the base branch
+    result = subprocess.run(
+        ["git", "rev-list", "--count", f"main..{branch_name}"],
+        capture_output=True,
+        text=True,
+        cwd=worktree_path
+    )
+    commits_ahead = int(result.stdout.strip() or "0")
+
+    already_implemented = has_uncommitted_changes or commits_ahead > 0
+
+    if already_implemented:
+        logger.info("Implementation already exists (uncommitted changes or existing commits)")
         make_issue_comment(
             issue_number,
-            format_issue_message(adw_id, AGENT_IMPLEMENTOR, f"❌ Error implementing solution: {implement_response.output}")
+            format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Implementation already completed (resuming workflow)")
         )
-        sys.exit(1)
-    
-    logger.debug(f"Implementation response: {implement_response.output}")
-    make_issue_comment(
-        issue_number,
-        format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Solution implemented")
-    )
+    else:
+        # Implement the plan (executing in worktree)
+        logger.info("Implementing solution in worktree")
+        make_issue_comment(
+            issue_number,
+            format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Implementing solution in isolated environment")
+        )
+
+        implement_response = implement_plan(plan_file, adw_id, logger, working_dir=worktree_path)
+
+        if not implement_response.success:
+            logger.error(f"Error implementing solution: {implement_response.output}")
+            make_issue_comment(
+                issue_number,
+                format_issue_message(adw_id, AGENT_IMPLEMENTOR, f"❌ Error implementing solution: {implement_response.output}")
+            )
+            sys.exit(1)
+
+        logger.debug(f"Implementation response: {implement_response.output}")
+        make_issue_comment(
+            issue_number,
+            format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Solution implemented")
+        )
     
     # Fetch issue data for commit message generation
     logger.info("Fetching issue data for commit message")

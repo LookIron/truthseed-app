@@ -342,19 +342,88 @@ def prompt_claude_code(request: AgentPromptRequest) -> AgentPromptResponse:
     env = get_claude_env()
 
     try:
-        # Open output file for streaming
+        # Use Popen instead of run to avoid blocking on processes that don't terminate cleanly
+        # Monitor the JSONL output file to detect completion
+        import time
+        import signal
+
         with open(request.output_file, "w") as output_f:
-            # Execute Claude Code and stream output to file
-            result = subprocess.run(
+            process = subprocess.Popen(
                 cmd,
-                stdout=output_f,  # Stream directly to file
+                stdout=output_f,
                 stderr=subprocess.PIPE,
                 text=True,
                 env=env,
-                cwd=request.working_dir,  # Use working_dir if provided
+                cwd=request.working_dir,
             )
 
-        if result.returncode == 0:
+            # Monitor the output file for completion
+            max_wait_time = 600  # 10 minutes max
+            check_interval = 2  # Check every 2 seconds
+            time_waited = 0
+            result_found = False
+
+            while time_waited < max_wait_time:
+                # Check if process has exited
+                poll_result = process.poll()
+                if poll_result is not None:
+                    # Process exited
+                    break
+
+                # Check if result message exists in JSONL
+                try:
+                    if os.path.exists(request.output_file):
+                        with open(request.output_file, "r") as check_f:
+                            lines = check_f.readlines()
+                            if lines:
+                                # Check last few lines for result message
+                                for line in reversed(lines[-5:]):
+                                    try:
+                                        data = json.loads(line.strip())
+                                        if data.get("type") == "result":
+                                            result_found = True
+                                            break
+                                    except:
+                                        pass
+                except:
+                    pass
+
+                if result_found:
+                    # Give process a moment to finish writing
+                    time.sleep(1)
+
+                    # Check if process is still running
+                    if process.poll() is None:
+                        # Process didn't terminate after writing result - send SIGTERM
+                        try:
+                            process.terminate()
+                            # Wait up to 5 seconds for graceful termination
+                            try:
+                                process.wait(timeout=5)
+                            except subprocess.TimeoutExpired:
+                                # Force kill if it doesn't respond
+                                process.kill()
+                                process.wait()
+                        except:
+                            pass
+                    break
+
+                time.sleep(check_interval)
+                time_waited += check_interval
+
+            # If we timed out, kill the process
+            if time_waited >= max_wait_time and process.poll() is None:
+                try:
+                    process.kill()
+                    process.wait()
+                except:
+                    pass
+
+            # Get the final return code and stderr
+            result_returncode = process.poll() if process.poll() is not None else -1
+            stderr_output = process.stderr.read() if process.stderr else ""
+
+        if result_returncode == 0 or result_found:
 
             # Parse the JSONL file
             messages, result_message = parse_jsonl_output(request.output_file)
@@ -430,7 +499,7 @@ def prompt_claude_code(request: AgentPromptRequest) -> AgentPromptResponse:
                 )
         else:
             # Error occurred - stderr is captured, stdout went to file
-            stderr_msg = result.stderr.strip() if result.stderr else ""
+            stderr_msg = stderr_output.strip() if stderr_output else ""
 
             # Try to read the output file to check for errors in stdout
             stdout_msg = ""
@@ -480,7 +549,7 @@ def prompt_claude_code(request: AgentPromptRequest) -> AgentPromptResponse:
             elif stdout_msg and stderr_msg:
                 error_msg = f"Claude Code error: {stderr_msg}\nStdout: {stdout_msg}"
             else:
-                error_msg = f"Claude Code error: Command failed with exit code {result.returncode}"
+                error_msg = f"Claude Code error: Command failed with exit code {result_returncode}"
 
             # Always truncate error messages to prevent huge outputs
             return AgentPromptResponse(
