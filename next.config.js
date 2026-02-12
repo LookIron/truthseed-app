@@ -13,6 +13,9 @@ const nextConfig = {
   poweredByHeader: false,
   compress: true,
 
+  // Set the correct workspace root for worktrees
+  outputFileTracingRoot: __dirname,
+
   // PWA configuration
 
   // Environment variables
