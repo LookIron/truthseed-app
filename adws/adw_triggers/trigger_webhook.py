@@ -82,8 +82,8 @@ async def github_webhook(request: Request):
         trigger_reason = ""
         content_to_check = ""
 
-        # Check if this is an issue opened event
-        if event_type == "issues" and action == "opened" and issue_number:
+        # Check if this is an issue opened or edited event
+        if event_type == "issues" and action in ["opened", "edited"] and issue_number:
             issue_body = issue.get("body", "")
             content_to_check = issue_body
 
@@ -93,14 +93,18 @@ async def github_webhook(request: Request):
                 workflow = None
             # Check if body contains "adw_"
             elif "adw_" in issue_body.lower():
-                # Use temporary ID for classification
+                # Use temporary ID for classification (or reuse existing if edited)
                 temp_id = make_adw_id()
                 extraction_result = extract_adw_info(issue_body, temp_id)
                 if extraction_result.has_workflow:
                     workflow = extraction_result.workflow_command
                     provided_adw_id = extraction_result.adw_id
                     model_set = extraction_result.model_set
-                    trigger_reason = f"New issue with {workflow} workflow"
+
+                    if action == "edited":
+                        trigger_reason = f"Issue edited with {workflow} workflow"
+                    else:
+                        trigger_reason = f"New issue with {workflow} workflow"
 
         # Check if this is an issue comment
         elif event_type == "issue_comment" and action == "created" and issue_number:
