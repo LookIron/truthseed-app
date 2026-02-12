@@ -210,53 +210,68 @@ def main():
             format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Solution implemented")
         )
     
-    # Fetch issue data for commit message generation
-    logger.info("Fetching issue data for commit message")
-    issue = fetch_issue(issue_number, repo_path)
-    
-    # Get issue classification from state or classify if needed
-    issue_command = state.get("issue_class")
-    if not issue_command:
-        logger.info("No issue classification in state, running classify_issue")
-        from adw_modules.workflow_ops import classify_issue
-        issue_command, error = classify_issue(issue, adw_id, logger)
-        if error:
-            logger.error(f"Error classifying issue: {error}")
-            # Default to feature if classification fails
-            issue_command = "/feature"
-            logger.warning("Defaulting to /feature after classification error")
-        else:
-            # Save the classification for future use
-            state.update(issue_class=issue_command)
-            state.save("adw_build_iso")
-    
-    # Create commit message
-    logger.info("Creating implementation commit")
-    commit_msg, error = create_commit(AGENT_IMPLEMENTOR, issue, issue_command, adw_id, logger, worktree_path)
-    
-    if error:
-        logger.error(f"Error creating commit message: {error}")
-        make_issue_comment(
-            issue_number,
-            format_issue_message(adw_id, AGENT_IMPLEMENTOR, f"❌ Error creating commit message: {error}")
-        )
-        sys.exit(1)
-    
-    # Commit the implementation (in worktree)
-    success, error = commit_changes(commit_msg, cwd=worktree_path)
-    
-    if not success:
-        logger.error(f"Error committing implementation: {error}")
-        make_issue_comment(
-            issue_number,
-            format_issue_message(adw_id, AGENT_IMPLEMENTOR, f"❌ Error committing implementation: {error}")
-        )
-        sys.exit(1)
-    
-    logger.info(f"Committed implementation: {commit_msg}")
-    make_issue_comment(
-        issue_number, format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Implementation committed")
+    # Check if there are uncommitted changes that need to be committed
+    result = subprocess.run(
+        ["git", "status", "--porcelain"],
+        capture_output=True,
+        text=True,
+        cwd=worktree_path
     )
+    has_uncommitted_changes = bool(result.stdout.strip())
+
+    if has_uncommitted_changes:
+        # Fetch issue data for commit message generation
+        logger.info("Fetching issue data for commit message")
+        issue = fetch_issue(issue_number, repo_path)
+
+        # Get issue classification from state or classify if needed
+        issue_command = state.get("issue_class")
+        if not issue_command:
+            logger.info("No issue classification in state, running classify_issue")
+            from adw_modules.workflow_ops import classify_issue
+            issue_command, error = classify_issue(issue, adw_id, logger)
+            if error:
+                logger.error(f"Error classifying issue: {error}")
+                # Default to feature if classification fails
+                issue_command = "/feature"
+                logger.warning("Defaulting to /feature after classification error")
+            else:
+                # Save the classification for future use
+                state.update(issue_class=issue_command)
+                state.save("adw_build_iso")
+
+        # Create commit message
+        logger.info("Creating implementation commit")
+        commit_msg, error = create_commit(AGENT_IMPLEMENTOR, issue, issue_command, adw_id, logger, worktree_path)
+
+        if error:
+            logger.error(f"Error creating commit message: {error}")
+            make_issue_comment(
+                issue_number,
+                format_issue_message(adw_id, AGENT_IMPLEMENTOR, f"❌ Error creating commit message: {error}")
+            )
+            sys.exit(1)
+
+        # Commit the implementation (in worktree)
+        success, error = commit_changes(commit_msg, cwd=worktree_path)
+
+        if not success:
+            logger.error(f"Error committing implementation: {error}")
+            make_issue_comment(
+                issue_number,
+                format_issue_message(adw_id, AGENT_IMPLEMENTOR, f"❌ Error committing implementation: {error}")
+            )
+            sys.exit(1)
+
+        logger.info(f"Committed implementation: {commit_msg}")
+        make_issue_comment(
+            issue_number, format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Implementation committed")
+        )
+    else:
+        logger.info("No uncommitted changes - commit already exists")
+        make_issue_comment(
+            issue_number, format_issue_message(adw_id, AGENT_IMPLEMENTOR, "✅ Implementation already committed")
+        )
     
     # Finalize git operations (push and PR)
     # Note: This will work from the worktree context
