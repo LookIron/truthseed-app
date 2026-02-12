@@ -63,10 +63,10 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing UI text changes for data upload functionality
     - When troubleshooting upload button display or terminology
 
-- app_docs/feature-7-ci-pnpm-version-fix.md
+- app_docs/feature-e0066ae3-complete-truths-update.md
   - Conditions:
-    - When working with GitHub Actions CI/CD workflows
-    - When troubleshooting pnpm version conflicts or setup issues
-    - When debugging CI checks that fail despite code being correct
-    - When modifying .github/workflows/ci.yml
-    - When setting up or maintaining package manager configuration
+    - When working with src/content/truths.json
+    - When implementing biblical truths content updates
+    - When troubleshooting truth data structure or schema
+    - When working with Truth model validation
+    - When adding or modifying biblical truth entries
