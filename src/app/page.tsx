@@ -61,8 +61,8 @@ export default function Home() {
           )}
         </div>
 
-        {/* Another Truth Button */}
-        <div className="flex justify-center pt-4">
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
           <button
             onClick={handleAnotherTruth}
             disabled={!currentTruth || isTransitioning}
@@ -85,6 +85,28 @@ export default function Home() {
             </svg>
             Otra verdad
           </button>
+
+          <a
+            href="/truths"
+            className="btn btn-secondary text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            aria-label="Ver todas las verdades"
+          >
+            <svg
+              className="w-5 h-5 inline-block mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 10h16M4 14h16M4 18h16"
+              />
+            </svg>
+            Ver Todas
+          </a>
         </div>
 
         {/* Footer */}
