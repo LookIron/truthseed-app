@@ -1,0 +1,33 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="64" fill="url(#gradient)"/>
+
+  <!-- Seed Icon -->
+  <g transform="translate(156, 156)">
+    <!-- Main seed shape -->
+    <ellipse cx="100" cy="100" rx="80" ry="100" fill="#ffffff" opacity="0.95"/>
+
+    <!-- Inner detail -->
+    <ellipse cx="100" cy="100" rx="50" ry="70" fill="#E0E7FF"/>
+
+    <!-- Sprout -->
+    <path d="M 100 40 Q 120 20, 140 30 Q 150 40, 140 50"
+          stroke="#4CAF50"
+          stroke-width="8"
+          fill="none"
+          stroke-linecap="round"/>
+    <path d="M 100 40 Q 80 20, 60 30 Q 50 40, 60 50"
+          stroke="#4CAF50"
+          stroke-width="8"
+          fill="none"
+          stroke-linecap="round"/>
+  </g>
+
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,168 @@
+{
+  "truths": [
+    {
+      "id": "accepted-child-of-god",
+      "title": "Soy aceptado: Soy hijo de Dios",
+      "renounceStatement": "Renuncio a la mentira que soy rechazado. En Cristo, soy hijo de Dios.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Juan",
+          "chapter": 1,
+          "verseStart": 12,
+          "display": "Juan 1:12",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["identity", "adoption", "acceptance"]
+    },
+    {
+      "id": "secure-free-from-condemnation",
+      "title": "Soy seguro: Estoy libre de condenación",
+      "renounceStatement": "Renuncio a la mentira de la condenación. En Cristo, no hay ninguna condenación para mí.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Romanos",
+          "chapter": 8,
+          "verseStart": 1,
+          "verseEnd": 2,
+          "display": "Romanos 8:1-2",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["freedom", "forgiveness", "security"]
+    },
+    {
+      "id": "significant-gods-workmanship",
+      "title": "Soy significante: Soy obra maestra de Dios",
+      "renounceStatement": "Renuncio a la mentira que no tengo valor. En Cristo, soy su obra maestra creada para buenas obras.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "Efesios",
+          "chapter": 2,
+          "verseStart": 10,
+          "display": "Efesios 2:10",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["purpose", "value", "creation"]
+    },
+    {
+      "id": "loved-nothing-can-separate",
+      "title": "Soy amado: Nada me puede separar del amor de Dios",
+      "renounceStatement": "Renuncio a la mentira que estoy solo y no amado. En Cristo, nada me puede separar del amor de Dios.",
+      "category": "loved",
+      "references": [
+        {
+          "book": "Romanos",
+          "chapter": 8,
+          "verseStart": 38,
+          "verseEnd": 39,
+          "display": "Romanos 8:38-39",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["love", "security", "assurance"]
+    },
+    {
+      "id": "identity-new-creation",
+      "title": "Soy nueva criatura: Las cosas viejas pasaron",
+      "renounceStatement": "Renuncio a vivir en mi vieja identidad. En Cristo, soy una nueva creación.",
+      "category": "identity",
+      "references": [
+        {
+          "book": "2 Corintios",
+          "chapter": 5,
+          "verseStart": 17,
+          "display": "2 Corintios 5:17",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["transformation", "newness", "identity"]
+    },
+    {
+      "id": "freedom-set-free",
+      "title": "Soy libre: Cristo me ha libertado",
+      "renounceStatement": "Renuncio a vivir en esclavitud. En Cristo, he sido libertado para libertad.",
+      "category": "freedom",
+      "references": [
+        {
+          "book": "Gálatas",
+          "chapter": 5,
+          "verseStart": 1,
+          "display": "Gálatas 5:1",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["freedom", "liberty", "deliverance"]
+    },
+    {
+      "id": "accepted-chosen-before-foundation",
+      "title": "Soy aceptado: Fui escogido antes de la fundación del mundo",
+      "renounceStatement": "Renuncio a la mentira que soy un accidente. En Cristo, fui escogido antes de la fundación del mundo.",
+      "category": "accepted",
+      "references": [
+        {
+          "book": "Efesios",
+          "chapter": 1,
+          "verseStart": 4,
+          "display": "Efesios 1:4",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["chosen", "predestined", "acceptance"]
+    },
+    {
+      "id": "secure-sealed-with-holy-spirit",
+      "title": "Soy seguro: Estoy sellado con el Espíritu Santo",
+      "renounceStatement": "Renuncio a la mentira de inseguridad. En Cristo, estoy sellado con el Espíritu Santo como garantía.",
+      "category": "secure",
+      "references": [
+        {
+          "book": "Efesios",
+          "chapter": 1,
+          "verseStart": 13,
+          "verseEnd": 14,
+          "display": "Efesios 1:13-14",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["security", "holy-spirit", "guarantee"]
+    },
+    {
+      "id": "significant-temple-of-god",
+      "title": "Soy significante: Soy templo del Espíritu Santo",
+      "renounceStatement": "Renuncio a la mentira que mi cuerpo no importa. En Cristo, soy templo del Espíritu Santo.",
+      "category": "significant",
+      "references": [
+        {
+          "book": "1 Corintios",
+          "chapter": 6,
+          "verseStart": 19,
+          "verseEnd": 20,
+          "display": "1 Corintios 6:19-20",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["holy-spirit", "holiness", "value"]
+    },
+    {
+      "id": "loved-loved-with-everlasting-love",
+      "title": "Soy amado: Dios me ha amado con amor eterno",
+      "renounceStatement": "Renuncio a dudar del amor de Dios. En Cristo, Él me ha amado con amor eterno.",
+      "category": "loved",
+      "references": [
+        {
+          "book": "Jeremías",
+          "chapter": 31,
+          "verseStart": 3,
+          "display": "Jeremías 31:3",
+          "translation": "RVR60"
+        }
+      ],
+      "tags": ["love", "faithfulness", "eternal"]
+    }
+  ]
+}
