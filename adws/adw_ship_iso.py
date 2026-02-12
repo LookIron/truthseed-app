@@ -55,15 +55,24 @@ def get_main_repo_root() -> str:
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def manual_merge_to_main(branch_name: str, logger: logging.Logger) -> Tuple[bool, Optional[str]]:
+def manual_merge_to_main(
+    branch_name: str,
+    logger: logging.Logger,
+    issue_number: str,
+    adw_id: str,
+    worktree_path: str
+) -> Tuple[bool, Optional[str]]:
     """Manually merge a branch to main using git commands.
-    
+
     This runs in the main repository root, not in a worktree.
-    
+
     Args:
         branch_name: The feature branch to merge
         logger: Logger instance
-        
+        issue_number: Issue number for comments
+        adw_id: ADW ID for conflict resolution
+        worktree_path: Path to worktree for conflict resolution
+
     Returns:
         Tuple of (success, error_message)
     """
@@ -108,7 +117,55 @@ def manual_merge_to_main(branch_name: str, logger: logging.Logger) -> Tuple[bool
             subprocess.run(["git", "checkout", original_branch], cwd=repo_root)
             return False, f"Failed to pull latest main: {result.stderr}"
         
-        # Step 4: Merge the feature branch (no-ff to preserve all commits)
+        # Step 4: Check for conflicts before merging
+        logger.info(f"Checking for conflicts with main...")
+        test_merge_result = subprocess.run(
+            ["git", "merge", "--no-commit", "--no-ff", "origin/main"],
+            capture_output=True, text=True, cwd=worktree_path
+        )
+
+        has_conflicts = test_merge_result.returncode != 0
+
+        # Abort the test merge
+        subprocess.run(["git", "merge", "--abort"], cwd=worktree_path, capture_output=True)
+
+        if has_conflicts:
+            logger.warning("Conflicts detected, running conflict resolution...")
+            make_issue_comment(
+                issue_number,
+                format_issue_message(adw_id, AGENT_SHIPPER, "⚠️ Merge conflicts detected, resolving automatically...")
+            )
+
+            # Run conflict resolution in worktree
+            conflict_resolution_script = os.path.join(repo_root, "adws", "adw_resolve_conflicts.py")
+            resolve_result = subprocess.run(
+                ["uv", "run", conflict_resolution_script, issue_number, adw_id],
+                capture_output=True,
+                text=True,
+                cwd=repo_root
+            )
+
+            if resolve_result.returncode != 0:
+                logger.error(f"Conflict resolution failed: {resolve_result.stderr}")
+                subprocess.run(["git", "checkout", original_branch], cwd=repo_root)
+                return False, f"Conflict resolution failed: {resolve_result.stderr}"
+
+            logger.info("Conflicts resolved successfully")
+
+            # Push the resolved branch
+            push_result = subprocess.run(
+                ["git", "push", "origin", branch_name],
+                capture_output=True,
+                text=True,
+                cwd=worktree_path
+            )
+
+            if push_result.returncode != 0:
+                logger.error(f"Failed to push resolved branch: {push_result.stderr}")
+                subprocess.run(["git", "checkout", original_branch], cwd=repo_root)
+                return False, f"Failed to push resolved branch: {push_result.stderr}"
+
+        # Step 5: Merge the feature branch (no-ff to preserve all commits)
         logger.info(f"Merging branch {branch_name} (no-ff to preserve all commits)...")
         result = subprocess.run(
             ["git", "merge", branch_name, "--no-ff", "-m", f"Merge branch '{branch_name}' via ADW Ship workflow"],
@@ -278,7 +335,7 @@ def main():
                            "Using manual git operations in main repository")
     )
     
-    success, error = manual_merge_to_main(branch_name, logger)
+    success, error = manual_merge_to_main(branch_name, logger, issue_number, adw_id, worktree_path)
     
     if not success:
         logger.error(f"Failed to merge: {error}")
