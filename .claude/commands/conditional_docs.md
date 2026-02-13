@@ -83,3 +83,14 @@ This prompt helps you determine what documentation you should read based on the 
     - When implementing fallback between BibleApiProvider and MockBibleProvider
     - When working with Spanish biblical book name parsing
     - When troubleshooting caching for Bible verses
+
+- app_docs/feature-12-bible-api-replacement.md
+  - Conditions:
+    - When working with docs-bible-api integration
+    - When understanding the migration from scripture.api.bible to docs-bible-api
+    - When troubleshooting Bible verse fetching without API keys
+    - When implementing changes to Bible API client or verse parser
+    - When working with lowercase Spanish book names in Bible references
+    - When configuring Bible translations (nvi, rv60)
+    - When understanding the removal of MockBibleProvider
+    - When working with path-based verse ID format (e.g., mateo/5/13-14)
