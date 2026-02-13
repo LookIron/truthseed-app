@@ -3,7 +3,7 @@
 import { Truth } from '@/domain/models/Truth';
 import { formatReference } from '@/domain/models/Reference';
 import { useState, useEffect } from 'react';
-import { MockBibleProvider } from '@/infrastructure/bible/MockBibleProvider';
+import { bibleProvider } from '@/lib/bible-provider-factory';
 import { isVerseError } from '@/domain/services/BibleProvider';
 import { verseCache } from '@/infrastructure/cache/IndexedDBCache';
 import { getReferenceCacheKey } from '@/domain/models/Reference';
@@ -23,8 +23,6 @@ export function TruthCard({ truth }: TruthCardProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Use mock provider for now
-    const bibleProvider = new MockBibleProvider();
     async function fetchVerse() {
       setIsLoading(true);
       setVerseError(null);

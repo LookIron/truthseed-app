@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
+import { BibleApiClient } from '@/lib/bible-api-client';
+import { Reference } from '@/domain/models/Reference';
+import { MockBibleProvider } from '@/infrastructure/bible/MockBibleProvider';
 
 const VerseQuerySchema = z.object({
   book: z.string().min(1),
@@ -52,53 +55,64 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // In a real implementation, you would:
-    // 1. Map book name to Bible API book ID
-    // 2. Construct the proper API URL
-    // 3. Make the request with authentication
-    // 4. Parse the response
-
-    // For now, return mock data since we don't have actual API credentials
-    // This allows the app to function without real API setup
-    const mockResponse = {
-      text: `Texto bíblico de ${book} ${chapter}:${verseStart}${verseEnd ? `-${verseEnd}` : ''} (${translation})`,
-      reference: {
-        book,
-        chapter: parseInt(chapter),
-        verseStart: parseInt(verseStart),
-        verseEnd: verseEnd ? parseInt(verseEnd) : undefined,
-        display: `${book} ${chapter}:${verseStart}${verseEnd ? `-${verseEnd}` : ''}`,
-        translation,
-      },
+    // Construct Reference object from validated query parameters
+    const reference: Reference = {
+      book,
+      chapter: parseInt(chapter),
+      verseStart: parseInt(verseStart),
+      verseEnd: verseEnd ? parseInt(verseEnd) : undefined,
+      display: `${book} ${chapter}:${verseStart}${verseEnd ? `-${verseEnd}` : ''}`,
       translation,
     };
 
-    // Example of how you would make a real API call:
-    /*
-    const bibleId = await getBibleIdForTranslation(translation);
-    const verseId = `${bookId}.${chapter}.${verseStart}${verseEnd ? `-${verseEnd}` : ''}`;
+    // Create BibleApiClient instance
+    const client = new BibleApiClient(baseUrl, apiKey, translation);
 
-    const response = await fetch(
-      `${baseUrl}/bibles/${bibleId}/verses/${verseId}`,
-      {
+    // Attempt to fetch verse from scripture.api.bible
+    const verseData = await client.fetchVerse(reference);
+
+    // If API call succeeds, return the verse
+    if (verseData) {
+      const response = {
+        text: verseData.text,
+        reference,
+        translation: verseData.translation,
+      };
+
+      return NextResponse.json(response, {
         headers: {
-          'api-key': apiKey,
+          'Cache-Control':
+            'public, s-maxage=604800, stale-while-revalidate=86400',
         },
-        next: {
-          revalidate: 60 * 60 * 24 * 7, // Cache for 7 days
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error(`Bible API error: ${response.statusText}`);
+      });
     }
 
-    const data = await response.json();
-    const verseText = data.data.content; // Extract text from API response
-    */
+    // Fallback to MockBibleProvider if API fails
+    console.warn(
+      '[Verse API] BibleApiClient failed, falling back to MockBibleProvider'
+    );
+    const mockProvider = new MockBibleProvider();
+    const mockResult = await mockProvider.fetchVerse(reference);
 
-    return NextResponse.json(mockResponse, {
+    // If mock provider returns error, send 404
+    if ('error' in mockResult) {
+      return NextResponse.json(
+        {
+          error: 'Verse not found',
+          message: mockResult.error,
+        },
+        { status: 404 }
+      );
+    }
+
+    // Return mock result with cache headers
+    const response = {
+      text: mockResult.text,
+      reference: mockResult.reference,
+      translation: mockResult.translation,
+    };
+
+    return NextResponse.json(response, {
       headers: {
         'Cache-Control':
           'public, s-maxage=604800, stale-while-revalidate=86400',
