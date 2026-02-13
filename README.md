@@ -68,82 +68,33 @@ pnpm install
 cp .env.example .env
 ```
 
-4. (Optional) Configure Bible API:
+4. (Optional) Configure Bible Translation:
 
-The TruthSeed app can display real Bible verses by integrating with the scripture.api.bible service. This step is **optional** - the app works perfectly fine without an API key by using mock verse data as a fallback.
-
-#### Getting Your API Key
-
-1. Visit [scripture.api.bible](https://scripture.api.bible) and create a free account
-2. Navigate to your dashboard and locate the "API Keys" section
-3. Copy your personal API key (no credit card required)
-4. Edit your `.env` file and add your credentials:
-
-```env
-BIBLE_API_BASE_URL=https://api.scripture.api.bible/v1
-BIBLE_API_KEY=your_actual_api_key_here
-BIBLE_DEFAULT_TRANSLATION=RVR60
-```
+The TruthSeed app displays real Bible verses using [docs-bible-api](https://bible-api.deno.dev), a free API that requires no authentication.
 
 #### Supported Translations
 
-- **RVR60** (Reina-Valera 1960): Primary Spanish translation, most widely used
-- **NVI** (Nueva Versión Internacional): Alternative modern Spanish translation
-- Other translations available at scripture.api.bible
+Edit your `.env` file to set your preferred translation:
 
-The app is optimized for RVR60, which provides accurate Spanish verses for all biblical references in the truths database.
+```env
+BIBLE_DEFAULT_TRANSLATION=nvi
+```
+
+Available translations:
+
+- **nvi** (Nueva Versión Internacional): Default, modern Spanish translation
+- **rvr60** (Reina-Valera 1960): Traditional Spanish translation, most widely used
+- Other translations available at [docs-bible-api](https://bible-api.deno.dev)
 
 #### Caching & Offline Support
 
-The app implements intelligent caching to minimize API calls and provide offline functionality:
+The app implements intelligent caching for offline functionality:
 
 - **Server-side cache**: Verses are cached for 7 days using Next.js caching headers
 - **Client-side cache**: IndexedDB stores verses locally for instant offline access
-- **Rate limit protection**: Free tier allows 500 requests/day; aggressive caching keeps usage minimal
+- **No rate limits**: The docs-bible-api service is free with no usage restrictions
 
 Once a verse is fetched, it's available offline indefinitely through the IndexedDB cache.
-
-#### Fallback Behavior
-
-The app gracefully handles API unavailability:
-
-- **No API key configured**: Automatically uses mock verse data
-- **API service down**: Falls back to mock data seamlessly
-- **Network offline**: Serves previously cached verses from IndexedDB
-- **Verse not found**: Displays user-friendly error message instead of crash
-
-#### Troubleshooting
-
-**"Invalid API key" errors:**
-
-- Verify your API key is correctly copied from scripture.api.bible dashboard
-- Ensure no extra spaces or quotes in your `.env` file
-- Restart your development server after updating `.env`
-
-**Rate limiting (429 errors):**
-
-- Free tier limit: 500 requests/day
-- Check if you've exceeded your daily quota in the scripture.api.bible dashboard
-- Caching should prevent this; if it occurs, clear your cache and verify caching is working
-
-**Network failures:**
-
-- The app automatically falls back to mock data when the API is unreachable
-- Check your internet connection and firewall settings
-- Verify `BIBLE_API_BASE_URL` is set to `https://api.scripture.api.bible/v1`
-
-**How to verify API is working:**
-
-1. Open browser DevTools → Network tab
-2. Load a truth in the app
-3. Look for requests to `api.scripture.api.bible`
-4. If you see 200 responses, the API integration is working
-5. If no API requests appear, check that your API key is configured in `.env`
-
-**Checking if you're using mock data vs real API:**
-
-- Mock data: Limited number of hardcoded verses, "Mock verse not found" for missing verses
-- Real API: All biblical references fetch successfully with complete verse texts in Spanish
 
 ### Development
 
@@ -361,13 +312,11 @@ The GitHub Actions workflow automatically:
 
 | Variable                    | Required | Default       | Description                  |
 | --------------------------- | -------- | ------------- | ---------------------------- |
-| `BIBLE_API_BASE_URL`        | No       | -             | Bible API base URL           |
-| `BIBLE_API_KEY`             | No       | -             | Bible API key                |
-| `BIBLE_DEFAULT_TRANSLATION` | No       | `RVR60`       | Default Bible translation    |
+| `BIBLE_DEFAULT_TRANSLATION` | No       | `nvi`         | Default Bible translation    |
 | `NEXT_PUBLIC_APP_NAME`      | No       | `TruthSeed`   | App name (visible to client) |
 | `NODE_ENV`                  | No       | `development` | Node environment             |
 
-**Note:** Bible API variables are optional. The app uses mock data if not configured.
+**Note:** The app uses [docs-bible-api](https://bible-api.deno.dev) which is free and requires no authentication.
 
 ## Deployment
 
@@ -420,10 +369,6 @@ Output directory: `.next`
 ```bash
 pnpm validate:content
 ```
-
-4. Update mock provider if needed:
-   - Edit `src/infrastructure/bible/MockBibleProvider.ts`
-   - Add verse text to `mockVerses` map
 
 ## Git Workflow
 
@@ -516,7 +461,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Bible verses from [scripture.api.bible](https://scripture.api.bible)
+- Bible verses from [docs-bible-api](https://bible-api.deno.dev)
 - Built with [Next.js](https://nextjs.org/)
 - Icons designed with [Figma](https://www.figma.com/)
 

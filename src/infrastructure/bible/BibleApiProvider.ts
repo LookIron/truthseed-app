@@ -7,21 +7,13 @@ import {
 import { Reference } from '@/domain/models/Reference';
 
 /**
- * Bible API Provider that fetches verses from scripture.api.bible
- * Requires API key configuration via environment variables
+ * Bible API Provider that fetches verses from docs-bible-api
+ * Free API - no authentication required
  */
 export class BibleApiProvider implements BibleProvider {
-  private readonly baseUrl: string;
-  private readonly apiKey: string;
   private readonly defaultTranslation: string;
 
-  constructor(
-    baseUrl?: string,
-    apiKey?: string,
-    defaultTranslation: string = 'RVR60'
-  ) {
-    this.baseUrl = baseUrl || '';
-    this.apiKey = apiKey || '';
+  constructor(defaultTranslation: string = 'nvi') {
     this.defaultTranslation = defaultTranslation;
   }
 
@@ -30,17 +22,10 @@ export class BibleApiProvider implements BibleProvider {
   }
 
   isConfigured(): boolean {
-    return Boolean(this.baseUrl && this.apiKey);
+    return true;
   }
 
   async fetchVerse(reference: Reference): Promise<FetchVerseResult> {
-    if (!this.isConfigured()) {
-      return this.createError(
-        reference,
-        'Bible API not configured. Please set BIBLE_API_BASE_URL and BIBLE_API_KEY environment variables.'
-      );
-    }
-
     try {
       // Call our API route instead of directly calling the Bible API
       // This keeps the API key server-side

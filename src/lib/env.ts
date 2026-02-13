@@ -5,12 +5,11 @@
 
 /**
  * Get Bible API configuration from environment
+ * docs-bible-api is free and requires no authentication
  */
 export function getBibleApiConfig() {
   return {
-    baseUrl: process.env.BIBLE_API_BASE_URL || '',
-    apiKey: process.env.BIBLE_API_KEY || '',
-    defaultTranslation: process.env.BIBLE_DEFAULT_TRANSLATION || 'RVR60',
+    defaultTranslation: process.env.BIBLE_DEFAULT_TRANSLATION || 'nvi',
   };
 }
 
@@ -28,10 +27,10 @@ export function getAppConfig() {
 
 /**
  * Check if Bible API is configured
+ * Always returns true since docs-bible-api requires no configuration
  */
 export function isBibleApiConfigured(): boolean {
-  const config = getBibleApiConfig();
-  return Boolean(config.baseUrl && config.apiKey);
+  return true;
 }
 
 /**

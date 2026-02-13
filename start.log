@@ -1,0 +1,20 @@
+Loading ports from .ports.env...
+Starting TruthSeed PWA on port 9205...
+Starting Next.js development server...
+
+> truthseed-app@1.0.0 dev /Users/esteban.camacho/Projects/agentic-coding/code/truthseed-app/trees/9dc16cf2
+> next dev
+
+   ▲ Next.js 15.5.12
+   - Local:        http://localhost:9205
+   - Network:      http://192.168.128.4:9205
+   - Environments: .env
+
+ ✓ Starting...
+> [PWA] PWA support is disabled
+> [PWA] PWA support is disabled
+ ✓ Ready in 1826ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 1392ms (517 modules)
+ GET / 404 in 1619ms
+ GET /api/verse?verseId=mateo/5/13&translation=nvi 404 in 33ms

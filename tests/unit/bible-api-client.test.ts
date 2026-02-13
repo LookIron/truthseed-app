@@ -7,12 +7,8 @@ describe('BibleApiClient', () => {
   let fetchMock: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
-    // Create client instance
-    client = new BibleApiClient(
-      'https://api.scripture.api.bible/v1',
-      'test-api-key',
-      '592420522e16049f-01'
-    );
+    // Create client instance (docs-bible-api)
+    client = new BibleApiClient('https://bible-api.deno.dev/api/read', 'nvi');
 
     // Mock fetch
     fetchMock = vi.spyOn(global, 'fetch') as ReturnType<typeof vi.fn>;
@@ -34,20 +30,17 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content: '<p>Vosotros sois la sal de la tierra.</p>',
-          reference: 'Mateo 5:13',
+      const mockResponse = [
+        {
+          verse: 'Vosotros sois la sal de la tierra.',
+          number: 13,
+          study: '',
+          id: 'mateo-5-13',
         },
-      };
+      ];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -60,7 +53,7 @@ describe('BibleApiClient', () => {
 
       expect(result).not.toBeNull();
       expect(result?.text).toBe('Vosotros sois la sal de la tierra.');
-      expect(result?.translation).toBe('592420522e16049f-01');
+      expect(result?.translation).toBe('nvi');
     });
 
     it('should fetch verse range successfully', async () => {
@@ -70,22 +63,23 @@ describe('BibleApiClient', () => {
         verseStart: 13,
         verseEnd: 14,
         display: 'Mateo 5:13-14',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13-MAT.5.14',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content:
-            '<p>Vosotros sois la sal de la tierra.</p> <p>Vosotros sois la luz del mundo.</p>',
-          reference: 'Mateo 5:13-14',
-          verseCount: 2,
+      const mockResponse = [
+        {
+          verse: 'Vosotros sois la sal de la tierra.',
+          number: 13,
+          study: '',
+          id: 'mateo-5-13',
         },
-      };
+        {
+          verse: 'Vosotros sois la luz del mundo.',
+          number: 14,
+          study: '',
+          id: 'mateo-5-14',
+        },
+      ];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -108,21 +102,18 @@ describe('BibleApiClient', () => {
         chapter: 3,
         verseStart: 16,
         display: 'Juan 3:16',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
-      const mockResponse = {
-        data: {
-          id: 'JHN.3.16',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'JHN',
-          chapterId: 'JHN.3',
-          content:
-            '<p><strong>Porque de tal manera amó Dios</strong> al mundo, que ha dado a su <em>Hijo unigénito</em>.</p>',
-          reference: 'Juan 3:16',
+      const mockResponse = [
+        {
+          verse:
+            '<strong>Porque de tal manera amó Dios</strong> al mundo, que ha dado a su <em>Hijo unigénito</em>.',
+          number: 16,
+          study: '',
+          id: 'juan-3-16',
         },
-      };
+      ];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -142,67 +133,23 @@ describe('BibleApiClient', () => {
       expect(result?.text).not.toContain('>');
     });
 
-    it('should send proper Authorization header', async () => {
-      const reference: Reference = {
-        book: 'Mateo',
-        chapter: 5,
-        verseStart: 13,
-        display: 'Mateo 5:13',
-        translation: 'RVR60',
-      };
-
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content: '<p>Test content</p>',
-          reference: 'Mateo 5:13',
-        },
-      };
-
-      fetchMock.mockResolvedValueOnce(
-        new Response(JSON.stringify(mockResponse), {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        })
-      );
-
-      await client.fetchVerse(reference);
-
-      expect(fetchMock).toHaveBeenCalledWith(
-        expect.any(String),
-        expect.objectContaining({
-          headers: expect.objectContaining({
-            'api-key': 'test-api-key',
-            Accept: 'application/json',
-          }),
-        })
-      );
-    });
-
     it('should use reference translation if provided', async () => {
       const reference: Reference = {
         book: 'Mateo',
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'custom-translation-id',
+        translation: 'rvr60',
       };
 
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13',
-          orgId: 'test-org',
-          bibleId: 'custom-translation-id',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content: '<p>Test content</p>',
-          reference: 'Mateo 5:13',
+      const mockResponse = [
+        {
+          verse: 'Test content',
+          number: 13,
+          study: '',
+          id: 'mateo-5-13',
         },
-      };
+      ];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -214,7 +161,7 @@ describe('BibleApiClient', () => {
       await client.fetchVerse(reference);
 
       expect(fetchMock).toHaveBeenCalledWith(
-        expect.stringContaining('custom-translation-id'),
+        expect.stringContaining('rvr60'),
         expect.any(Object)
       );
     });
@@ -227,7 +174,7 @@ describe('BibleApiClient', () => {
         chapter: 999,
         verseStart: 999,
         display: 'Mateo 999:999',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       fetchMock.mockResolvedValueOnce(
@@ -245,37 +192,13 @@ describe('BibleApiClient', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null on 401 response (invalid API key)', async () => {
-      const reference: Reference = {
-        book: 'Mateo',
-        chapter: 5,
-        verseStart: 13,
-        display: 'Mateo 5:13',
-        translation: 'RVR60',
-      };
-
-      fetchMock.mockResolvedValueOnce(
-        new Response(
-          JSON.stringify({
-            statusCode: 401,
-            message: 'Invalid API key',
-          }),
-          { status: 401 }
-        )
-      );
-
-      const result = await client.fetchVerse(reference);
-
-      expect(result).toBeNull();
-    });
-
     it('should return null on 429 response (rate limit exceeded)', async () => {
       const reference: Reference = {
         book: 'Mateo',
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       fetchMock.mockResolvedValueOnce(
@@ -299,7 +222,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       // First attempt returns 500
@@ -341,7 +264,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       // First attempt returns 503
@@ -383,7 +306,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       fetchMock.mockRejectedValueOnce(new Error('Network error'));
@@ -399,7 +322,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       // Mock fetch to throw AbortError
@@ -422,7 +345,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       // First attempt returns 500
@@ -437,17 +360,14 @@ describe('BibleApiClient', () => {
       );
 
       // Retry succeeds
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content: '<p>Test content</p>',
-          reference: 'Mateo 5:13',
+      const mockResponse = [
+        {
+          verse: 'Test content',
+          number: 13,
+          study: '',
+          id: 'mateo-5-13',
         },
-      };
+      ];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -474,7 +394,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       fetchMock.mockResolvedValueOnce(
@@ -499,7 +419,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       fetchMock.mockResolvedValue(
@@ -533,7 +453,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       // Both attempts fail
@@ -565,7 +485,7 @@ describe('BibleApiClient', () => {
         chapter: 1,
         verseStart: 1,
         display: 'Invalid Book 1:1',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       const result = await client.fetchVerse(reference);
@@ -574,26 +494,16 @@ describe('BibleApiClient', () => {
       expect(fetchMock).not.toHaveBeenCalled();
     });
 
-    it('should return null for empty response content', async () => {
+    it('should return null for empty response array', async () => {
       const reference: Reference = {
         book: 'Mateo',
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content: '', // Empty content
-          reference: 'Mateo 5:13',
-        },
-      };
+      const mockResponse: never[] = [];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -607,26 +517,23 @@ describe('BibleApiClient', () => {
       expect(result).toBeNull();
     });
 
-    it('should return null for content with only HTML tags', async () => {
+    it('should return null for verse with empty text', async () => {
       const reference: Reference = {
         book: 'Mateo',
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content: '<p></p>', // Only tags, no content
-          reference: 'Mateo 5:13',
+      const mockResponse = [
+        {
+          verse: '',
+          number: 13,
+          study: '',
+          id: 'mateo-5-13',
         },
-      };
+      ];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -646,7 +553,7 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       fetchMock.mockResolvedValueOnce(
@@ -667,20 +574,17 @@ describe('BibleApiClient', () => {
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
-      const mockResponse = {
-        data: {
-          id: 'MAT.5.13',
-          orgId: 'test-org',
-          bibleId: '592420522e16049f-01',
-          bookId: 'MAT',
-          chapterId: 'MAT.5',
-          content: '<p>Vosotros   sois\n\nla    sal   \t  de la tierra.</p>',
-          reference: 'Mateo 5:13',
+      const mockResponse = [
+        {
+          verse: 'Vosotros   sois\n\nla    sal   \t  de la tierra.',
+          number: 13,
+          study: '',
+          id: 'mateo-5-13',
         },
-      };
+      ];
 
       fetchMock.mockResolvedValueOnce(
         new Response(JSON.stringify(mockResponse), {
@@ -695,13 +599,13 @@ describe('BibleApiClient', () => {
       expect(result?.text).toBe('Vosotros sois la sal de la tierra.');
     });
 
-    it('should handle response with missing data field', async () => {
+    it('should handle non-array response', async () => {
       const reference: Reference = {
         book: 'Mateo',
         chapter: 5,
         verseStart: 13,
         display: 'Mateo 5:13',
-        translation: 'RVR60',
+        translation: 'nvi',
       };
 
       fetchMock.mockResolvedValueOnce(
