@@ -2,30 +2,17 @@ import { Reference } from '@/domain/models/Reference';
 import { formatVerseIdForApi } from './verse-parser';
 
 /**
- * Response format from scripture.api.bible for a verse/passage request
+ * Response format from docs-bible-api for a verse/passage request
+ * API returns an array of verse objects
  */
-interface ApiVerseResponse {
-  data: {
-    id: string;
-    orgId: string;
-    bibleId: string;
-    bookId: string;
-    chapterId: string;
-    content: string;
-    reference: string;
-    verseCount?: number;
-    copyright?: string;
-  };
+interface ApiVerseItem {
+  verse: string;
+  number: number;
+  study: string;
+  id: string;
 }
 
-/**
- * Error response from scripture.api.bible
- */
-interface ApiErrorResponse {
-  statusCode: number;
-  message: string;
-  error?: string;
-}
+type ApiVerseResponse = ApiVerseItem[];
 
 /**
  * Result of a successful verse fetch
@@ -36,27 +23,28 @@ interface VerseData {
 }
 
 /**
- * HTTP client for scripture.api.bible
- * Handles authentication, retries, timeouts, and error handling
+ * HTTP client for docs-bible-api
+ * Handles retries, timeouts, and error handling
+ * No authentication required - free API
  */
 export class BibleApiClient {
   private readonly baseUrl: string;
-  private readonly apiKey: string;
-  private readonly bibleId: string;
+  private readonly translation: string;
   private readonly timeout: number = 10000; // 10 seconds
   private readonly retryDelay: number = 1000; // 1 second
 
   /**
    * Create a new BibleApiClient
    *
-   * @param baseUrl - Base URL for scripture.api.bible (e.g., "https://api.scripture.api.bible/v1")
-   * @param apiKey - API key for authentication
-   * @param bibleId - Bible translation ID (e.g., "592420522e16049f-01" for RVR60)
+   * @param baseUrl - Base URL for docs-bible-api (defaults to "https://bible-api.deno.dev/api/read")
+   * @param translation - Bible translation (e.g., "nvi" for Nueva Versión Internacional)
    */
-  constructor(baseUrl: string, apiKey: string, bibleId: string) {
+  constructor(
+    baseUrl: string = 'https://bible-api.deno.dev/api/read',
+    translation: string = 'nvi'
+  ) {
     this.baseUrl = baseUrl.replace(/\/$/, ''); // Remove trailing slash
-    this.apiKey = apiKey;
-    this.bibleId = bibleId;
+    this.translation = translation;
   }
 
   /**
@@ -81,9 +69,9 @@ export class BibleApiClient {
       return null;
     }
 
-    // Use the reference translation or the default bibleId
-    const translationId = reference.translation || this.bibleId;
-    const url = `${this.baseUrl}/bibles/${translationId}/passages/${verseId}`;
+    // Use the reference translation or the default translation
+    const translationId = reference.translation || this.translation;
+    const url = `${this.baseUrl}/${translationId}/${verseId}`;
 
     // First attempt
     const result = await this.makeRequest(url, reference);
@@ -120,7 +108,6 @@ export class BibleApiClient {
       const response = await fetch(url, {
         method: 'GET',
         headers: {
-          'api-key': this.apiKey,
           Accept: 'application/json',
         },
         signal: controller.signal,
@@ -140,14 +127,6 @@ export class BibleApiClient {
         return null;
       }
 
-      // 401 - Invalid API key
-      if (response.status === 401) {
-        console.error(
-          '[BibleApiClient] Authentication failed: Invalid API key'
-        );
-        return null;
-      }
-
       // 429 - Rate limit exceeded
       if (response.status === 429) {
         console.error('[BibleApiClient] Rate limit exceeded');
@@ -163,12 +142,8 @@ export class BibleApiClient {
       }
 
       // Other errors
-      const errorData: ApiErrorResponse = await response.json().catch(() => ({
-        statusCode: response.status,
-        message: response.statusText,
-      }));
       console.error(
-        `[BibleApiClient] API error (${errorData.statusCode}): ${errorData.message}`
+        `[BibleApiClient] API error (${response.status}): ${response.statusText}`
       );
       return null;
     } catch (error) {
@@ -193,7 +168,7 @@ export class BibleApiClient {
   /**
    * Extract and clean verse text from API response
    *
-   * @param data - The API response data
+   * @param data - The API response data (array of verse objects)
    * @param reference - The reference being fetched
    * @returns Verse data with cleaned text
    */
@@ -202,12 +177,19 @@ export class BibleApiClient {
     reference: Reference
   ): VerseData | null {
     try {
-      // The content field contains HTML - we need to strip tags
-      const htmlContent = data.data.content;
+      // Response is an array of verse objects, extract and join verse text
+      if (!Array.isArray(data) || data.length === 0) {
+        console.error(
+          `[BibleApiClient] Empty or invalid response for ${reference.display}`
+        );
+        return null;
+      }
 
-      // Remove HTML tags and clean up whitespace
-      const text = htmlContent
-        .replace(/<[^>]+>/g, '') // Remove all HTML tags
+      // Extract verse text from each object and join with spaces
+      const text = data
+        .map((item) => item.verse)
+        .join(' ')
+        .replace(/<[^>]+>/g, '') // Remove any HTML tags if present
         .replace(/\s+/g, ' ') // Normalize whitespace
         .trim();
 
@@ -220,7 +202,7 @@ export class BibleApiClient {
 
       return {
         text,
-        translation: data.data.bibleId,
+        translation: reference.translation || this.translation,
       };
     } catch (error) {
       console.error(

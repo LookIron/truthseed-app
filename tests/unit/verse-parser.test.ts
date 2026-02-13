@@ -10,193 +10,193 @@ import { Reference } from '@/domain/models/Reference';
 describe('parseSpanishBookName', () => {
   describe('Old Testament books', () => {
     it('should parse Génesis with accent', () => {
-      expect(parseSpanishBookName('Génesis')).toBe('GEN');
+      expect(parseSpanishBookName('Génesis')).toBe('genesis');
     });
 
     it('should parse Genesis without accent', () => {
-      expect(parseSpanishBookName('Genesis')).toBe('GEN');
+      expect(parseSpanishBookName('Genesis')).toBe('genesis');
     });
 
     it('should parse Éxodo with accent', () => {
-      expect(parseSpanishBookName('Éxodo')).toBe('EXO');
+      expect(parseSpanishBookName('Éxodo')).toBe('exodo');
     });
 
     it('should parse Exodo without accent', () => {
-      expect(parseSpanishBookName('Exodo')).toBe('EXO');
+      expect(parseSpanishBookName('Exodo')).toBe('exodo');
     });
 
     it('should parse Números with accent', () => {
-      expect(parseSpanishBookName('Números')).toBe('NUM');
+      expect(parseSpanishBookName('Números')).toBe('numeros');
     });
 
     it('should parse Numeros without accent', () => {
-      expect(parseSpanishBookName('Numeros')).toBe('NUM');
+      expect(parseSpanishBookName('Numeros')).toBe('numeros');
     });
 
     it('should parse 1 Samuel', () => {
-      expect(parseSpanishBookName('1 Samuel')).toBe('1SA');
+      expect(parseSpanishBookName('1 Samuel')).toBe('1-samuel');
     });
 
     it('should parse 2 Samuel', () => {
-      expect(parseSpanishBookName('2 Samuel')).toBe('2SA');
+      expect(parseSpanishBookName('2 Samuel')).toBe('2-samuel');
     });
 
     it('should parse 1 Reyes', () => {
-      expect(parseSpanishBookName('1 Reyes')).toBe('1KI');
+      expect(parseSpanishBookName('1 Reyes')).toBe('1-reyes');
     });
 
     it('should parse 2 Reyes', () => {
-      expect(parseSpanishBookName('2 Reyes')).toBe('2KI');
+      expect(parseSpanishBookName('2 Reyes')).toBe('2-reyes');
     });
 
     it('should parse 1 Crónicas with accent', () => {
-      expect(parseSpanishBookName('1 Crónicas')).toBe('1CH');
+      expect(parseSpanishBookName('1 Crónicas')).toBe('1-cronicas');
     });
 
     it('should parse 1 Cronicas without accent', () => {
-      expect(parseSpanishBookName('1 Cronicas')).toBe('1CH');
+      expect(parseSpanishBookName('1 Cronicas')).toBe('1-cronicas');
     });
 
     it('should parse 2 Crónicas with accent', () => {
-      expect(parseSpanishBookName('2 Crónicas')).toBe('2CH');
+      expect(parseSpanishBookName('2 Crónicas')).toBe('2-cronicas');
     });
 
     it('should parse Salmos', () => {
-      expect(parseSpanishBookName('Salmos')).toBe('PSA');
+      expect(parseSpanishBookName('Salmos')).toBe('salmos');
     });
 
     it('should parse Salmo (singular)', () => {
-      expect(parseSpanishBookName('Salmo')).toBe('PSA');
+      expect(parseSpanishBookName('Salmo')).toBe('salmos');
     });
 
     it('should parse Isaías with accent', () => {
-      expect(parseSpanishBookName('Isaías')).toBe('ISA');
+      expect(parseSpanishBookName('Isaías')).toBe('isaias');
     });
 
     it('should parse Isaias without accent', () => {
-      expect(parseSpanishBookName('Isaias')).toBe('ISA');
+      expect(parseSpanishBookName('Isaias')).toBe('isaias');
     });
 
     it('should parse Daniel', () => {
-      expect(parseSpanishBookName('Daniel')).toBe('DAN');
+      expect(parseSpanishBookName('Daniel')).toBe('daniel');
     });
 
     it('should parse Malaquías with accent', () => {
-      expect(parseSpanishBookName('Malaquías')).toBe('MAL');
+      expect(parseSpanishBookName('Malaquías')).toBe('malaquias');
     });
   });
 
   describe('New Testament books', () => {
     it('should parse Mateo', () => {
-      expect(parseSpanishBookName('Mateo')).toBe('MAT');
+      expect(parseSpanishBookName('Mateo')).toBe('mateo');
     });
 
     it('should parse Marcos', () => {
-      expect(parseSpanishBookName('Marcos')).toBe('MRK');
+      expect(parseSpanishBookName('Marcos')).toBe('marcos');
     });
 
     it('should parse Lucas', () => {
-      expect(parseSpanishBookName('Lucas')).toBe('LUK');
+      expect(parseSpanishBookName('Lucas')).toBe('lucas');
     });
 
     it('should parse Juan', () => {
-      expect(parseSpanishBookName('Juan')).toBe('JHN');
+      expect(parseSpanishBookName('Juan')).toBe('juan');
     });
 
     it('should parse Hechos', () => {
-      expect(parseSpanishBookName('Hechos')).toBe('ACT');
+      expect(parseSpanishBookName('Hechos')).toBe('hechos');
     });
 
     it('should parse Romanos', () => {
-      expect(parseSpanishBookName('Romanos')).toBe('ROM');
+      expect(parseSpanishBookName('Romanos')).toBe('romanos');
     });
 
     it('should parse 1 Corintios', () => {
-      expect(parseSpanishBookName('1 Corintios')).toBe('1CO');
+      expect(parseSpanishBookName('1 Corintios')).toBe('1-corintios');
     });
 
     it('should parse 2 Corintios', () => {
-      expect(parseSpanishBookName('2 Corintios')).toBe('2CO');
+      expect(parseSpanishBookName('2 Corintios')).toBe('2-corintios');
     });
 
     it('should parse Gálatas with accent', () => {
-      expect(parseSpanishBookName('Gálatas')).toBe('GAL');
+      expect(parseSpanishBookName('Gálatas')).toBe('galatas');
     });
 
     it('should parse Galatas without accent', () => {
-      expect(parseSpanishBookName('Galatas')).toBe('GAL');
+      expect(parseSpanishBookName('Galatas')).toBe('galatas');
     });
 
     it('should parse Efesios', () => {
-      expect(parseSpanishBookName('Efesios')).toBe('EPH');
+      expect(parseSpanishBookName('Efesios')).toBe('efesios');
     });
 
     it('should parse Filipenses', () => {
-      expect(parseSpanishBookName('Filipenses')).toBe('PHP');
+      expect(parseSpanishBookName('Filipenses')).toBe('filipenses');
     });
 
     it('should parse 1 Timoteo', () => {
-      expect(parseSpanishBookName('1 Timoteo')).toBe('1TI');
+      expect(parseSpanishBookName('1 Timoteo')).toBe('1-timoteo');
     });
 
     it('should parse 2 Timoteo', () => {
-      expect(parseSpanishBookName('2 Timoteo')).toBe('2TI');
+      expect(parseSpanishBookName('2 Timoteo')).toBe('2-timoteo');
     });
 
     it('should parse 1 Pedro', () => {
-      expect(parseSpanishBookName('1 Pedro')).toBe('1PE');
+      expect(parseSpanishBookName('1 Pedro')).toBe('1-pedro');
     });
 
     it('should parse 2 Pedro', () => {
-      expect(parseSpanishBookName('2 Pedro')).toBe('2PE');
+      expect(parseSpanishBookName('2 Pedro')).toBe('2-pedro');
     });
 
     it('should parse 1 Juan', () => {
-      expect(parseSpanishBookName('1 Juan')).toBe('1JN');
+      expect(parseSpanishBookName('1 Juan')).toBe('1-juan');
     });
 
     it('should parse 2 Juan', () => {
-      expect(parseSpanishBookName('2 Juan')).toBe('2JN');
+      expect(parseSpanishBookName('2 Juan')).toBe('2-juan');
     });
 
     it('should parse 3 Juan', () => {
-      expect(parseSpanishBookName('3 Juan')).toBe('3JN');
+      expect(parseSpanishBookName('3 Juan')).toBe('3-juan');
     });
 
     it('should parse Apocalipsis', () => {
-      expect(parseSpanishBookName('Apocalipsis')).toBe('REV');
+      expect(parseSpanishBookName('Apocalipsis')).toBe('apocalipsis');
     });
   });
 
   describe('case insensitivity', () => {
     it('should handle uppercase', () => {
-      expect(parseSpanishBookName('MATEO')).toBe('MAT');
+      expect(parseSpanishBookName('MATEO')).toBe('mateo');
     });
 
     it('should handle lowercase', () => {
-      expect(parseSpanishBookName('mateo')).toBe('MAT');
+      expect(parseSpanishBookName('mateo')).toBe('mateo');
     });
 
     it('should handle mixed case', () => {
-      expect(parseSpanishBookName('MaTeO')).toBe('MAT');
+      expect(parseSpanishBookName('MaTeO')).toBe('mateo');
     });
 
     it('should handle uppercase with accents', () => {
-      expect(parseSpanishBookName('GÉNESIS')).toBe('GEN');
+      expect(parseSpanishBookName('GÉNESIS')).toBe('genesis');
     });
   });
 
   describe('whitespace handling', () => {
     it('should trim leading whitespace', () => {
-      expect(parseSpanishBookName('  Mateo')).toBe('MAT');
+      expect(parseSpanishBookName('  Mateo')).toBe('mateo');
     });
 
     it('should trim trailing whitespace', () => {
-      expect(parseSpanishBookName('Mateo  ')).toBe('MAT');
+      expect(parseSpanishBookName('Mateo  ')).toBe('mateo');
     });
 
     it('should trim both leading and trailing whitespace', () => {
-      expect(parseSpanishBookName('  Mateo  ')).toBe('MAT');
+      expect(parseSpanishBookName('  Mateo  ')).toBe('mateo');
     });
   });
 
@@ -230,7 +230,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('MAT.5.13');
+      expect(formatVerseIdForApi(reference)).toBe('mateo/5/13');
     });
 
     it('should format verse with different book', () => {
@@ -242,7 +242,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('JHN.3.16');
+      expect(formatVerseIdForApi(reference)).toBe('juan/3/16');
     });
 
     it('should format verse from Old Testament', () => {
@@ -254,7 +254,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('GEN.1.1');
+      expect(formatVerseIdForApi(reference)).toBe('genesis/1/1');
     });
 
     it('should format verse with numbered book', () => {
@@ -266,7 +266,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('1JN.4.8');
+      expect(formatVerseIdForApi(reference)).toBe('1-juan/4/8');
     });
   });
 
@@ -281,7 +281,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('MAT.5.13-MAT.5.14');
+      expect(formatVerseIdForApi(reference)).toBe('mateo/5/13-14');
     });
 
     it('should format longer verse range', () => {
@@ -294,7 +294,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('ROM.8.38-ROM.8.39');
+      expect(formatVerseIdForApi(reference)).toBe('romanos/8/38-39');
     });
 
     it('should treat verseEnd equal to verseStart as single verse', () => {
@@ -307,7 +307,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('MAT.5.13');
+      expect(formatVerseIdForApi(reference)).toBe('mateo/5/13');
     });
   });
 
@@ -321,7 +321,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('PSA.23.1');
+      expect(formatVerseIdForApi(reference)).toBe('salmos/23/1');
     });
 
     it('should format 2 Corintios', () => {
@@ -333,7 +333,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('2CO.5.17');
+      expect(formatVerseIdForApi(reference)).toBe('2-corintios/5/17');
     });
 
     it('should format Apocalipsis', () => {
@@ -345,7 +345,7 @@ describe('formatVerseIdForApi', () => {
         translation: 'RVR60',
       };
 
-      expect(formatVerseIdForApi(reference)).toBe('REV.21.5');
+      expect(formatVerseIdForApi(reference)).toBe('apocalipsis/21/5');
     });
   });
 

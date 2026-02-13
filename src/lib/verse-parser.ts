@@ -1,114 +1,114 @@
 import { Reference } from '@/domain/models/Reference';
 
 /**
- * Map of Spanish Bible book names to scripture.api.bible book codes
+ * Map of Spanish Bible book names to docs-bible-api lowercase book names
  * Covers all 66 books of the Bible (Old and New Testament)
  */
 const SPANISH_BOOK_MAP: Record<string, string> = {
   // Old Testament
-  génesis: 'GEN',
-  genesis: 'GEN',
-  éxodo: 'EXO',
-  exodo: 'EXO',
-  levítico: 'LEV',
-  levitico: 'LEV',
-  números: 'NUM',
-  numeros: 'NUM',
-  deuteronomio: 'DEU',
-  josué: 'JOS',
-  josue: 'JOS',
-  jueces: 'JDG',
-  rut: 'RUT',
-  '1 samuel': '1SA',
-  '2 samuel': '2SA',
-  '1 reyes': '1KI',
-  '2 reyes': '2KI',
-  '1 crónicas': '1CH',
-  '1 cronicas': '1CH',
-  '2 crónicas': '2CH',
-  '2 cronicas': '2CH',
-  esdras: 'EZR',
-  nehemías: 'NEH',
-  nehemias: 'NEH',
-  ester: 'EST',
-  job: 'JOB',
-  salmos: 'PSA',
-  salmo: 'PSA',
-  proverbios: 'PRO',
-  eclesiastés: 'ECC',
-  ecclesiastes: 'ECC',
-  cantares: 'SNG',
-  'cantar de los cantares': 'SNG',
-  isaías: 'ISA',
-  isaias: 'ISA',
-  jeremías: 'JER',
-  jeremias: 'JER',
-  lamentaciones: 'LAM',
-  ezequiel: 'EZK',
-  daniel: 'DAN',
-  oseas: 'HOS',
-  joel: 'JOL',
-  amós: 'AMO',
-  amos: 'AMO',
-  abdías: 'OBA',
-  abdias: 'OBA',
-  jonás: 'JON',
-  jonas: 'JON',
-  miqueas: 'MIC',
-  nahúm: 'NAM',
-  nahum: 'NAM',
-  habacuc: 'HAB',
-  sofonías: 'ZEP',
-  sofonias: 'ZEP',
-  hageo: 'HAG',
-  zacarías: 'ZEC',
-  zacarias: 'ZEC',
-  malaquías: 'MAL',
-  malaquias: 'MAL',
+  génesis: 'genesis',
+  genesis: 'genesis',
+  éxodo: 'exodo',
+  exodo: 'exodo',
+  levítico: 'levitico',
+  levitico: 'levitico',
+  números: 'numeros',
+  numeros: 'numeros',
+  deuteronomio: 'deuteronomio',
+  josué: 'josue',
+  josue: 'josue',
+  jueces: 'jueces',
+  rut: 'rut',
+  '1 samuel': '1-samuel',
+  '2 samuel': '2-samuel',
+  '1 reyes': '1-reyes',
+  '2 reyes': '2-reyes',
+  '1 crónicas': '1-cronicas',
+  '1 cronicas': '1-cronicas',
+  '2 crónicas': '2-cronicas',
+  '2 cronicas': '2-cronicas',
+  esdras: 'esdras',
+  nehemías: 'nehemias',
+  nehemias: 'nehemias',
+  ester: 'ester',
+  job: 'job',
+  salmos: 'salmos',
+  salmo: 'salmos',
+  proverbios: 'proverbios',
+  eclesiastés: 'eclesiastes',
+  ecclesiastes: 'eclesiastes',
+  cantares: 'cantares',
+  'cantar de los cantares': 'cantares',
+  isaías: 'isaias',
+  isaias: 'isaias',
+  jeremías: 'jeremias',
+  jeremias: 'jeremias',
+  lamentaciones: 'lamentaciones',
+  ezequiel: 'ezequiel',
+  daniel: 'daniel',
+  oseas: 'oseas',
+  joel: 'joel',
+  amós: 'amos',
+  amos: 'amos',
+  abdías: 'abdias',
+  abdias: 'abdias',
+  jonás: 'jonas',
+  jonas: 'jonas',
+  miqueas: 'miqueas',
+  nahúm: 'nahum',
+  nahum: 'nahum',
+  habacuc: 'habacuc',
+  sofonías: 'sofonias',
+  sofonias: 'sofonias',
+  hageo: 'hageo',
+  zacarías: 'zacarias',
+  zacarias: 'zacarias',
+  malaquías: 'malaquias',
+  malaquias: 'malaquias',
 
   // New Testament
-  mateo: 'MAT',
-  marcos: 'MRK',
-  lucas: 'LUK',
-  juan: 'JHN',
-  hechos: 'ACT',
-  romanos: 'ROM',
-  '1 corintios': '1CO',
-  '2 corintios': '2CO',
-  gálatas: 'GAL',
-  galatas: 'GAL',
-  efesios: 'EPH',
-  filipenses: 'PHP',
-  colosenses: 'COL',
-  '1 tesalonicenses': '1TH',
-  '2 tesalonicenses': '2TH',
-  '1 timoteo': '1TI',
-  '2 timoteo': '2TI',
-  tito: 'TIT',
-  filemón: 'PHM',
-  filemon: 'PHM',
-  hebreos: 'HEB',
-  santiago: 'JAS',
-  '1 pedro': '1PE',
-  '2 pedro': '2PE',
-  '1 juan': '1JN',
-  '2 juan': '2JN',
-  '3 juan': '3JN',
-  judas: 'JUD',
-  apocalipsis: 'REV',
+  mateo: 'mateo',
+  marcos: 'marcos',
+  lucas: 'lucas',
+  juan: 'juan',
+  hechos: 'hechos',
+  romanos: 'romanos',
+  '1 corintios': '1-corintios',
+  '2 corintios': '2-corintios',
+  gálatas: 'galatas',
+  galatas: 'galatas',
+  efesios: 'efesios',
+  filipenses: 'filipenses',
+  colosenses: 'colosenses',
+  '1 tesalonicenses': '1-tesalonicenses',
+  '2 tesalonicenses': '2-tesalonicenses',
+  '1 timoteo': '1-timoteo',
+  '2 timoteo': '2-timoteo',
+  tito: 'tito',
+  filemón: 'filemon',
+  filemon: 'filemon',
+  hebreos: 'hebreos',
+  santiago: 'santiago',
+  '1 pedro': '1-pedro',
+  '2 pedro': '2-pedro',
+  '1 juan': '1-juan',
+  '2 juan': '2-juan',
+  '3 juan': '3-juan',
+  judas: 'judas',
+  apocalipsis: 'apocalipsis',
 };
 
 /**
- * Parse a Spanish book name and convert it to scripture.api.bible book code
+ * Parse a Spanish book name and convert it to docs-bible-api book name
  *
  * @param bookName - The Spanish name of the book (e.g., "Génesis", "1 Juan", "2 Corintios")
- * @returns The API book code (e.g., "GEN", "1JN", "2CO") or null if not recognized
+ * @returns The lowercase book name (e.g., "genesis", "1-juan", "2-corintios") or null if not recognized
  *
  * @example
  * ```typescript
- * parseSpanishBookName("Génesis") // returns "GEN"
- * parseSpanishBookName("1 Juan") // returns "1JN"
- * parseSpanishBookName("2 Corintios") // returns "2CO"
+ * parseSpanishBookName("Génesis") // returns "genesis"
+ * parseSpanishBookName("1 Juan") // returns "1-juan"
+ * parseSpanishBookName("2 Corintios") // returns "2-corintios"
  * parseSpanishBookName("Invalid") // returns null
  * ```
  */
@@ -121,11 +121,11 @@ export function parseSpanishBookName(bookName: string): string | null {
 }
 
 /**
- * Format a Reference object into scripture.api.bible verse ID format
+ * Format a Reference object into docs-bible-api path format
  *
  * Converts a Reference to the format expected by the API:
- * - Single verse: "BOOK.CHAPTER.VERSE" (e.g., "MAT.5.13")
- * - Verse range: "BOOK.CHAPTER.START-BOOK.CHAPTER.END" (e.g., "MAT.5.13-MAT.5.14")
+ * - Single verse: "book/chapter/verse" (e.g., "mateo/5/13")
+ * - Verse range: "book/chapter/start-end" (e.g., "mateo/5/13-14")
  *
  * @param reference - The Reference object to format
  * @returns The formatted verse ID string, or null if the book name cannot be parsed
@@ -139,7 +139,7 @@ export function parseSpanishBookName(bookName: string): string | null {
  *   display: "Mateo 5:13",
  *   translation: "RVR60"
  * };
- * formatVerseIdForApi(ref) // returns "MAT.5.13"
+ * formatVerseIdForApi(ref) // returns "mateo/5/13"
  *
  * const rangeRef = {
  *   book: "Mateo",
@@ -149,26 +149,26 @@ export function parseSpanishBookName(bookName: string): string | null {
  *   display: "Mateo 5:13-14",
  *   translation: "RVR60"
  * };
- * formatVerseIdForApi(rangeRef) // returns "MAT.5.13-MAT.5.14"
+ * formatVerseIdForApi(rangeRef) // returns "mateo/5/13-14"
  * ```
  */
 export function formatVerseIdForApi(reference: Reference): string | null {
-  // Parse the book name to get API code
-  const bookCode = parseSpanishBookName(reference.book);
+  // Parse the book name to get lowercase book name
+  const bookName = parseSpanishBookName(reference.book);
 
-  if (!bookCode) {
+  if (!bookName) {
     return null;
   }
 
   const { chapter, verseStart, verseEnd } = reference;
 
-  // Format single verse: BOOK.CHAPTER.VERSE
+  // Format single verse: book/chapter/verse
   if (!verseEnd || verseEnd === verseStart) {
-    return `${bookCode}.${chapter}.${verseStart}`;
+    return `${bookName}/${chapter}/${verseStart}`;
   }
 
-  // Format verse range: BOOK.CHAPTER.START-BOOK.CHAPTER.END
-  return `${bookCode}.${chapter}.${verseStart}-${bookCode}.${chapter}.${verseEnd}`;
+  // Format verse range: book/chapter/start-end
+  return `${bookName}/${chapter}/${verseStart}-${verseEnd}`;
 }
 
 /**
