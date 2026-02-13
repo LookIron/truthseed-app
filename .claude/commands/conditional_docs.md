@@ -94,3 +94,15 @@ This prompt helps you determine what documentation you should read based on the 
     - When configuring Bible translations (nvi, rv60)
     - When understanding the removal of MockBibleProvider
     - When working with path-based verse ID format (e.g., mateo/5/13-14)
+
+- app_docs/feature-14-verse-display-fix-and-translation-selector.md
+  - Conditions:
+    - When working with Bible verse display issues or parameter validation
+    - When implementing translation selection or multi-translation support
+    - When troubleshooting "Invalid params" errors in verse API route
+    - When working with src/components/TranslationSelector.tsx
+    - When working with src/lib/translation-storage.ts
+    - When implementing localStorage-based user preferences
+    - When handling API response format variations (single object vs array)
+    - When configuring supported Bible translations (rv1960, rv1995, nvi, dhh, pdt, kjv)
+    - When troubleshooting verse re-fetching or dynamic translation switching

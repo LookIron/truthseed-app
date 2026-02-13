@@ -3,7 +3,9 @@ import { formatVerseIdForApi } from './verse-parser';
 
 /**
  * Response format from docs-bible-api for a verse/passage request
- * API returns an array of verse objects
+ * API returns:
+ * - A single object for single verses
+ * - An array of objects for verse ranges
  */
 interface ApiVerseItem {
   verse: string;
@@ -12,7 +14,7 @@ interface ApiVerseItem {
   id: string;
 }
 
-type ApiVerseResponse = ApiVerseItem[];
+type ApiVerseResponse = ApiVerseItem | ApiVerseItem[];
 
 /**
  * Result of a successful verse fetch
@@ -168,7 +170,7 @@ export class BibleApiClient {
   /**
    * Extract and clean verse text from API response
    *
-   * @param data - The API response data (array of verse objects)
+   * @param data - The API response data (single object or array of verse objects)
    * @param reference - The reference being fetched
    * @returns Verse data with cleaned text
    */
@@ -177,8 +179,11 @@ export class BibleApiClient {
     reference: Reference
   ): VerseData | null {
     try {
-      // Response is an array of verse objects, extract and join verse text
-      if (!Array.isArray(data) || data.length === 0) {
+      // Normalize response to always be an array
+      const verses = Array.isArray(data) ? data : [data];
+
+      // Validate response
+      if (verses.length === 0) {
         console.error(
           `[BibleApiClient] Empty or invalid response for ${reference.display}`
         );
@@ -186,7 +191,7 @@ export class BibleApiClient {
       }
 
       // Extract verse text from each object and join with spaces
-      const text = data
+      const text = verses
         .map((item) => item.verse)
         .join(' ')
         .replace(/<[^>]+>/g, '') // Remove any HTML tags if present

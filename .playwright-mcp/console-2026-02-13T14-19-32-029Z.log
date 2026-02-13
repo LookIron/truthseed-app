@@ -1,0 +1,5 @@
+[    1177ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:9206/icons/icon-192x192.png:0
+[   19913ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:9206/api/verse?book=Colosenses&chapter=2&verseStart=10&translation=rv1960:0
+[   20763ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:9206/api/verse?book=Colosenses&chapter=2&verseStart=10&translation=rv1960:0
+[   57286ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:9206/api/verse?book=Romanos&chapter=8&verseStart=28&translation=rv1960:0
+[   58051ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:9206/api/verse?book=Romanos&chapter=8&verseStart=28&translation=rv1960:0

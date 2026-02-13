@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
       book: searchParams.get('book'),
       chapter: searchParams.get('chapter'),
       verseStart: searchParams.get('verseStart'),
-      verseEnd: searchParams.get('verseEnd'),
+      verseEnd: searchParams.get('verseEnd') ?? undefined,
       translation: searchParams.get('translation') || 'nvi',
     };
 
