@@ -8,6 +8,8 @@ import { isVerseError } from '@/domain/services/BibleProvider';
 import { verseCache } from '@/infrastructure/cache/IndexedDBCache';
 import { getReferenceCacheKey } from '@/domain/models/Reference';
 import { ListenButton } from './ListenButton';
+import { TranslationSelector } from './TranslationSelector';
+import { getTranslation, Translation } from '@/lib/translation-storage';
 
 interface TruthCardProps {
   truth: Truth;
@@ -21,6 +23,9 @@ export function TruthCard({ truth }: TruthCardProps) {
   const [verseText, setVerseText] = useState<string | null>(null);
   const [verseError, setVerseError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedTranslation, setSelectedTranslation] = useState<Translation>(
+    () => getTranslation()
+  );
 
   useEffect(() => {
     async function fetchVerse() {
@@ -28,7 +33,12 @@ export function TruthCard({ truth }: TruthCardProps) {
       setVerseError(null);
 
       try {
-        const reference = truth.references[0]; // Use first reference
+        // Use first reference and apply selected translation
+        const baseReference = truth.references[0];
+        const reference = {
+          ...baseReference,
+          translation: selectedTranslation,
+        };
         const cacheKey = getReferenceCacheKey(reference);
 
         // Try cache first
@@ -63,7 +73,7 @@ export function TruthCard({ truth }: TruthCardProps) {
     }
 
     fetchVerse();
-  }, [truth]);
+  }, [truth, selectedTranslation]);
 
   return (
     <div className="card max-w-2xl mx-auto space-y-6 animate-fade-in">
@@ -84,6 +94,13 @@ export function TruthCard({ truth }: TruthCardProps) {
         <p className="text-lg text-gray-800 dark:text-gray-200 font-medium">
           {truth.renounceStatement}
         </p>
+      </div>
+
+      {/* Translation Selector */}
+      <div className="flex justify-end">
+        <TranslationSelector
+          onChange={(translation) => setSelectedTranslation(translation)}
+        />
       </div>
 
       {/* Biblical Reference */}
