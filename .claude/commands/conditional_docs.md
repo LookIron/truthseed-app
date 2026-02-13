@@ -70,3 +70,16 @@ This prompt helps you determine what documentation you should read based on the 
     - When troubleshooting truth data structure or schema
     - When working with Truth model validation
     - When adding or modifying biblical truth entries
+
+- app_docs/feature-c5c51e28-bible-api-integration.md
+  - Conditions:
+    - When working with Bible API integration or verse fetching
+    - When implementing or modifying src/lib/bible-api-client.ts
+    - When implementing or modifying src/lib/verse-parser.ts
+    - When implementing or modifying src/lib/bible-provider-factory.ts
+    - When troubleshooting verse display or API errors
+    - When working with src/app/api/verse/route.ts
+    - When configuring Bible API environment variables
+    - When implementing fallback between BibleApiProvider and MockBibleProvider
+    - When working with Spanish biblical book name parsing
+    - When troubleshooting caching for Bible verses

@@ -70,17 +70,80 @@ cp .env.example .env
 
 4. (Optional) Configure Bible API:
 
-Edit `.env` and add your Bible API credentials:
+The TruthSeed app can display real Bible verses by integrating with the scripture.api.bible service. This step is **optional** - the app works perfectly fine without an API key by using mock verse data as a fallback.
+
+#### Getting Your API Key
+
+1. Visit [scripture.api.bible](https://scripture.api.bible) and create a free account
+2. Navigate to your dashboard and locate the "API Keys" section
+3. Copy your personal API key (no credit card required)
+4. Edit your `.env` file and add your credentials:
 
 ```env
 BIBLE_API_BASE_URL=https://api.scripture.api.bible/v1
-BIBLE_API_KEY=your_api_key_here
+BIBLE_API_KEY=your_actual_api_key_here
 BIBLE_DEFAULT_TRANSLATION=RVR60
 ```
 
-Get your API key from [scripture.api.bible](https://scripture.api.bible).
+#### Supported Translations
 
-**Note:** The app works without a Bible API key by using mock data.
+- **RVR60** (Reina-Valera 1960): Primary Spanish translation, most widely used
+- **NVI** (Nueva Versión Internacional): Alternative modern Spanish translation
+- Other translations available at scripture.api.bible
+
+The app is optimized for RVR60, which provides accurate Spanish verses for all biblical references in the truths database.
+
+#### Caching & Offline Support
+
+The app implements intelligent caching to minimize API calls and provide offline functionality:
+
+- **Server-side cache**: Verses are cached for 7 days using Next.js caching headers
+- **Client-side cache**: IndexedDB stores verses locally for instant offline access
+- **Rate limit protection**: Free tier allows 500 requests/day; aggressive caching keeps usage minimal
+
+Once a verse is fetched, it's available offline indefinitely through the IndexedDB cache.
+
+#### Fallback Behavior
+
+The app gracefully handles API unavailability:
+
+- **No API key configured**: Automatically uses mock verse data
+- **API service down**: Falls back to mock data seamlessly
+- **Network offline**: Serves previously cached verses from IndexedDB
+- **Verse not found**: Displays user-friendly error message instead of crash
+
+#### Troubleshooting
+
+**"Invalid API key" errors:**
+
+- Verify your API key is correctly copied from scripture.api.bible dashboard
+- Ensure no extra spaces or quotes in your `.env` file
+- Restart your development server after updating `.env`
+
+**Rate limiting (429 errors):**
+
+- Free tier limit: 500 requests/day
+- Check if you've exceeded your daily quota in the scripture.api.bible dashboard
+- Caching should prevent this; if it occurs, clear your cache and verify caching is working
+
+**Network failures:**
+
+- The app automatically falls back to mock data when the API is unreachable
+- Check your internet connection and firewall settings
+- Verify `BIBLE_API_BASE_URL` is set to `https://api.scripture.api.bible/v1`
+
+**How to verify API is working:**
+
+1. Open browser DevTools → Network tab
+2. Load a truth in the app
+3. Look for requests to `api.scripture.api.bible`
+4. If you see 200 responses, the API integration is working
+5. If no API requests appear, check that your API key is configured in `.env`
+
+**Checking if you're using mock data vs real API:**
+
+- Mock data: Limited number of hardcoded verses, "Mock verse not found" for missing verses
+- Real API: All biblical references fetch successfully with complete verse texts in Spanish
 
 ### Development
 

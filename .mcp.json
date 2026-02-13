@@ -6,7 +6,7 @@
         "@playwright/mcp@latest",
         "--isolated",
         "--config",
-        "/Users/esteban.camacho/Projects/agentic-coding/code/truthseed-app/trees/e0066ae3/playwright-mcp-config.json"
+        "/Users/esteban.camacho/Projects/agentic-coding/code/truthseed-app/trees/c5c51e28/playwright-mcp-config.json"
       ]
     }
   }
